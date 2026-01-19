@@ -29,13 +29,13 @@
 
 ---
 
-## 📸 Screenshots
+## 📸 Screenshot
 
 <div align="center">
 
-| Main Interface | Generation Progress | Results |
-|:--------------:|:-------------------:|:-------:|
-| ![Interface](screenshots/interface.png) | ![Progress](screenshots/progress.png) | ![Results](screenshots/results.png) |
+![Fast QR Generator Interface](screenshots/screenshot.png)
+
+*Fast QR Generator in action - generating QR codes in Google Sheets*
 
 </div>
 
@@ -54,7 +54,14 @@
 
 1. Open [Google Apps Script](https://script.google.com)
 2. Create a new project
-3. Copy `Code.gs` and `Sidebar.html` into your project
+3. Copy the following files into your project:
+   - `Code.gs`
+   - `QRService.gs`
+   - `SheetService.gs`
+   - `Sidebar.html`
+   - `App.html`
+   - `QRLib.html`
+   - `Styles.html`
 4. Save and refresh your Google Sheet
 5. Find **QR Generator** in the menu
 
@@ -125,16 +132,19 @@ Click **⚡ Start Generation** and watch the magic happen!
 
 ```
 fast-qr-generator/
-├── Code.gs                 # Main Apps Script backend
-├── Sidebar.html            # Frontend UI with embedded QR library
-├── appsscript.json         # Manifest file
+├── Code.gs                 # Main Apps Script entry point
+├── QRService.gs            # QR code generation service
+├── SheetService.gs         # Google Sheets interaction service
+├── Sidebar.html            # Sidebar launcher UI
+├── App.html                # Main application UI
+├── QRLib.html              # QR code generation library
+├── Styles.html             # Shared CSS styles
+├── index.html              # Landing page (GitHub Pages)
+├── support.html            # Help & Support page
 ├── privacy-policy.html     # Privacy Policy page
 ├── terms-of-service.html   # Terms of Service page
-├── README.md               # This file
-└── screenshots/            # Screenshots for documentation
-    ├── interface.png
-    ├── progress.png
-    └── results.png
+├── LICENSE                 # MIT License
+└── README.md               # This file
 ```
 
 ---
@@ -149,7 +159,7 @@ fast-qr-generator/
 - ✅ **No cookies** used
 - ✅ We have **zero access** to your spreadsheet data
 
-📄 [Read Full Privacy Policy](privacy-policy.html)
+📄 [Read Full Privacy Policy](https://asimnet.github.io/qr-generator-docs/privacy-policy.html)
 
 ---
 

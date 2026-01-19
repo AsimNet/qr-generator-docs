@@ -1,209 +1,476 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Fast QR Generator</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background: #f9f9f9;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e8f0fe',
+                            100: '#d2e3fc',
+                            200: '#a8c7fa',
+                            300: '#7cacf8',
+                            400: '#4e91f5',
+                            500: '#1a73e8',
+                            600: '#1557b0',
+                            700: '#104d99',
+                            800: '#0d47a1',
+                            900: '#0a3069'
+                        }
+                    }
+                }
+            }
         }
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #1a73e8;
-            border-bottom: 3px solid #1a73e8;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #1a73e8;
-            margin-top: 30px;
-        }
-        .lang-switch {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .lang-switch a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 5px;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .lang-switch a:hover {
-            background: #1557b0;
-        }
-        .effective-date {
-            background: #e8f0fe;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        ul {
-            padding-left: 25px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .contact {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-        .arabic {
-            direction: rtl;
-            text-align: right;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <div class="lang-switch">
-            <a href="#english">English</a>
-            <a href="#arabic">العربية</a>
-        </div>
-
-        <!-- ENGLISH VERSION -->
-        <div id="english">
-            <h1>🔒 Privacy Policy</h1>
-            <h2>Fast QR Generator Add-on for Google Sheets</h2>
-            
-            <div class="effective-date">
-                <strong>Effective Date:</strong> January 2025
-            </div>
-
-            <h2>1. Introduction</h2>
-            <p>Fast QR Generator ("the Add-on") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Google Sheets add-on.</p>
-
-            <h2>2. Information We Collect</h2>
-            <p><strong>We do NOT collect, store, or transmit any personal data.</strong></p>
-            <p>The Add-on:</p>
-            <ul>
-                <li>Only accesses the spreadsheet data you explicitly select for QR code generation</li>
-                <li>Processes all data locally within your browser and Google Sheets</li>
-                <li>Does not send any data to external servers</li>
-                <li>Does not use cookies or tracking technologies</li>
-                <li>Does not collect usage analytics</li>
-            </ul>
-
-            <h2>3. How the Add-on Works</h2>
-            <ul>
-                <li><strong>QR Code Generation:</strong> Happens entirely in your browser using JavaScript</li>
-                <li><strong>Data Access:</strong> Only reads cells you select as source</li>
-                <li><strong>Data Writing:</strong> Only writes QR images to columns you specify</li>
-                <li><strong>No External Calls:</strong> No data is sent to any external service</li>
-            </ul>
-
-            <h2>4. Permissions Explained</h2>
-            <p>The Add-on requires the following Google permissions:</p>
-            <ul>
-                <li><strong>View and manage spreadsheets:</strong> Required to read source data and write QR codes to your sheets</li>
-            </ul>
-            <p>These permissions are used solely for the core functionality of generating QR codes.</p>
-
-            <h2>5. Data Security</h2>
-            <ul>
-                <li>All processing happens within Google's secure infrastructure</li>
-                <li>No data leaves your Google account</li>
-                <li>We have no access to your spreadsheet data</li>
-            </ul>
-
-            <h2>6. Third-Party Services</h2>
-            <p>This Add-on does NOT use any third-party services, APIs, or analytics tools.</p>
-
-            <h2>7. Children's Privacy</h2>
-            <p>This Add-on is not directed at children under 13. We do not knowingly collect any information from children.</p>
-
-            <h2>8. Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
-
-            <h2>9. Contact Us</h2>
-            <div class="contact">
-                <p>If you have any questions about this Privacy Policy, please contact:</p>
-                <p><strong>Developer:</strong> Asim</p>
-                <p><strong>Email:</strong> [YOUR_EMAIL]</p>
-                <p><strong>Website:</strong> <a href="https://ko-fi.com/asimnet">https://ko-fi.com/asimnet</a></p>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
+                <a href="index.html" class="text-primary-500 font-semibold text-lg hover:text-primary-600 transition-colors">
+                    Fast QR Generator
+                </a>
+                <div class="flex items-center gap-2">
+                    <button onclick="showLang('en')" id="btn-en" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        English
+                    </button>
+                    <button onclick="showLang('ar')" id="btn-ar" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        العربية
+                    </button>
+                </div>
             </div>
         </div>
+    </nav>
 
-        <hr style="margin: 50px 0;">
+    <!-- ENGLISH VERSION -->
+    <div id="content-en">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Home
+            </a>
 
-        <!-- ARABIC VERSION -->
-        <div id="arabic" class="arabic">
-            <h1>🔒 سياسة الخصوصية</h1>
-            <h2>إضافة مولد QR السريع لجداول بيانات Google</h2>
-            
-            <div class="effective-date">
-                <strong>تاريخ السريان:</strong> يناير 2025
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="mr-3">🔒</span> Privacy Policy
+                    </h1>
+                    <h2 class="text-xl text-gray-600">Fast QR Generator Add-on for Google Sheets</h2>
+                </div>
+
+                <!-- Effective Date -->
+                <div class="bg-primary-50 border border-primary-100 rounded-xl p-4 mb-8">
+                    <p class="text-primary-700 font-medium">
+                        <span class="font-semibold">Effective Date:</span> January 2025
+                    </p>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-8">
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">1. Introduction</h2>
+                        <p class="text-gray-700 leading-relaxed">Fast QR Generator ("the Add-on") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Google Sheets add-on.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">2. Information We Collect</h2>
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+                            <p class="text-green-800 font-semibold">We do NOT collect, store, or transmit any personal data.</p>
+                        </div>
+                        <p class="text-gray-700 mb-4">The Add-on:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Only accesses the spreadsheet data you explicitly select for QR code generation
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Processes all data locally within your browser and Google Sheets
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Does not send any data to external servers
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Does not use cookies or tracking technologies
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Does not collect usage analytics
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">3. How the Add-on Works</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">QR Code Generation</h4>
+                                <p class="text-gray-600 text-sm">Happens entirely in your browser using JavaScript</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Data Access</h4>
+                                <p class="text-gray-600 text-sm">Only reads cells you select as source</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Data Writing</h4>
+                                <p class="text-gray-600 text-sm">Only writes QR images to columns you specify</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">No External Calls</h4>
+                                <p class="text-gray-600 text-sm">No data is sent to any external service</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">4. Permissions Explained</h2>
+                        <p class="text-gray-700 mb-4">The Add-on requires the following Google permissions:</p>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <h4 class="font-semibold text-blue-900 mb-2">View and manage spreadsheets</h4>
+                            <p class="text-blue-800 text-sm">Required to read source data and write QR codes to your sheets</p>
+                        </div>
+                        <p class="text-gray-600 mt-4 text-sm">These permissions are used solely for the core functionality of generating QR codes.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">5. Data Security</h2>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                All processing happens within Google's secure infrastructure
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                No data leaves your Google account
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                We have no access to your spreadsheet data
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">6. Third-Party Services</h2>
+                        <p class="text-gray-700 leading-relaxed">This Add-on does NOT use any third-party services, APIs, or analytics tools.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">7. Children's Privacy</h2>
+                        <p class="text-gray-700 leading-relaxed">This Add-on is not directed at children under 13. We do not knowingly collect any information from children.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">8. Changes to This Policy</h2>
+                        <p class="text-gray-700 leading-relaxed">We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">9. Contact Us</h2>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <p class="text-gray-700 mb-4">If you have any questions about this Privacy Policy, please contact:</p>
+                            <div class="space-y-2">
+                                <p class="text-gray-700"><span class="font-semibold">Developer:</span> Asim</p>
+                                <p class="text-gray-700"><span class="font-semibold">Email:</span> [YOUR_EMAIL]</p>
+                                <p class="text-gray-700"><span class="font-semibold">Website:</span> <a href="https://ko-fi.com/asimnet" class="text-primary-500 hover:text-primary-600 transition-colors">https://ko-fi.com/asimnet</a></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
+        </main>
 
-            <h2>1. مقدمة</h2>
-            <p>تلتزم إضافة مولد QR السريع ("الإضافة") بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية تعاملنا مع المعلومات عند استخدامك لإضافة جداول بيانات Google.</p>
-
-            <h2>2. المعلومات التي نجمعها</h2>
-            <p><strong>نحن لا نجمع أو نخزن أو ننقل أي بيانات شخصية.</strong></p>
-            <p>الإضافة:</p>
-            <ul>
-                <li>تصل فقط إلى بيانات جدول البيانات التي تحددها صراحةً لتوليد رمز QR</li>
-                <li>تعالج جميع البيانات محلياً داخل متصفحك وجداول بيانات Google</li>
-                <li>لا ترسل أي بيانات إلى خوادم خارجية</li>
-                <li>لا تستخدم ملفات تعريف الارتباط أو تقنيات التتبع</li>
-                <li>لا تجمع تحليلات الاستخدام</li>
-            </ul>
-
-            <h2>3. كيف تعمل الإضافة</h2>
-            <ul>
-                <li><strong>توليد رمز QR:</strong> يحدث بالكامل في متصفحك باستخدام JavaScript</li>
-                <li><strong>الوصول للبيانات:</strong> تقرأ فقط الخلايا التي تحددها كمصدر</li>
-                <li><strong>كتابة البيانات:</strong> تكتب فقط صور QR في الأعمدة التي تحددها</li>
-                <li><strong>بدون اتصالات خارجية:</strong> لا يتم إرسال أي بيانات إلى أي خدمة خارجية</li>
-            </ul>
-
-            <h2>4. شرح الأذونات</h2>
-            <p>تتطلب الإضافة أذونات Google التالية:</p>
-            <ul>
-                <li><strong>عرض وإدارة جداول البيانات:</strong> مطلوب لقراءة البيانات المصدر وكتابة رموز QR في جداولك</li>
-            </ul>
-            <p>تُستخدم هذه الأذونات فقط للوظيفة الأساسية لتوليد رموز QR.</p>
-
-            <h2>5. أمان البيانات</h2>
-            <ul>
-                <li>تتم جميع المعالجة داخل البنية التحتية الآمنة لـ Google</li>
-                <li>لا تغادر أي بيانات حسابك في Google</li>
-                <li>ليس لدينا وصول إلى بيانات جدول البيانات الخاص بك</li>
-            </ul>
-
-            <h2>6. خدمات الطرف الثالث</h2>
-            <p>لا تستخدم هذه الإضافة أي خدمات أو واجهات برمجة تطبيقات أو أدوات تحليل تابعة لجهات خارجية.</p>
-
-            <h2>7. خصوصية الأطفال</h2>
-            <p>هذه الإضافة غير موجهة للأطفال دون سن 13 عامًا. نحن لا نجمع عن قصد أي معلومات من الأطفال.</p>
-
-            <h2>8. التغييرات على هذه السياسة</h2>
-            <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سيتم نشر التغييرات على هذه الصفحة مع تاريخ سريان محدث.</p>
-
-            <h2>9. اتصل بنا</h2>
-            <div class="contact">
-                <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال:</p>
-                <p><strong>المطور:</strong> عاصم</p>
-                <p><strong>البريد الإلكتروني:</strong> [YOUR_EMAIL]</p>
-                <p><strong>الموقع:</strong> <a href="https://ko-fi.com/asimnet">https://ko-fi.com/asimnet</a></p>
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Fast QR Generator</h3>
+                        <p class="text-gray-400 text-sm">Generate QR codes directly in Google Sheets - fast, free, and privacy-focused.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">Terms of Service</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">Help & Support</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="mr-2">☕</span> Buy me a coffee on Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">Asim</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 Fast QR Generator. All rights reserved.</p>
+                </div>
             </div>
-        </div>
+        </footer>
     </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="content-ar" class="hidden" dir="rtl">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                العودة للرئيسية
+            </a>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="ml-3">🔒</span> سياسة الخصوصية
+                    </h1>
+                    <h2 class="text-xl text-gray-600">إضافة مولد QR السريع لجداول بيانات Google</h2>
+                </div>
+
+                <!-- Effective Date -->
+                <div class="bg-primary-50 border border-primary-100 rounded-xl p-4 mb-8">
+                    <p class="text-primary-700 font-medium">
+                        <span class="font-semibold">تاريخ السريان:</span> يناير 2025
+                    </p>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-8">
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">1. مقدمة</h2>
+                        <p class="text-gray-700 leading-relaxed">تلتزم إضافة مولد QR السريع ("الإضافة") بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيفية تعاملنا مع المعلومات عند استخدامك لإضافة جداول بيانات Google.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">2. المعلومات التي نجمعها</h2>
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+                            <p class="text-green-800 font-semibold">نحن لا نجمع أو نخزن أو ننقل أي بيانات شخصية.</p>
+                        </div>
+                        <p class="text-gray-700 mb-4">الإضافة:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                تصل فقط إلى بيانات جدول البيانات التي تحددها صراحةً لتوليد رمز QR
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                تعالج جميع البيانات محلياً داخل متصفحك وجداول بيانات Google
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                لا ترسل أي بيانات إلى خوادم خارجية
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                لا تستخدم ملفات تعريف الارتباط أو تقنيات التتبع
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                لا تجمع تحليلات الاستخدام
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">3. كيف تعمل الإضافة</h2>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">توليد رمز QR</h4>
+                                <p class="text-gray-600 text-sm">يحدث بالكامل في متصفحك باستخدام JavaScript</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">الوصول للبيانات</h4>
+                                <p class="text-gray-600 text-sm">تقرأ فقط الخلايا التي تحددها كمصدر</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">كتابة البيانات</h4>
+                                <p class="text-gray-600 text-sm">تكتب فقط صور QR في الأعمدة التي تحددها</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">بدون اتصالات خارجية</h4>
+                                <p class="text-gray-600 text-sm">لا يتم إرسال أي بيانات إلى أي خدمة خارجية</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">4. شرح الأذونات</h2>
+                        <p class="text-gray-700 mb-4">تتطلب الإضافة أذونات Google التالية:</p>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <h4 class="font-semibold text-blue-900 mb-2">عرض وإدارة جداول البيانات</h4>
+                            <p class="text-blue-800 text-sm">مطلوب لقراءة البيانات المصدر وكتابة رموز QR في جداولك</p>
+                        </div>
+                        <p class="text-gray-600 mt-4 text-sm">تُستخدم هذه الأذونات فقط للوظيفة الأساسية لتوليد رموز QR.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">5. أمان البيانات</h2>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                تتم جميع المعالجة داخل البنية التحتية الآمنة لـ Google
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                لا تغادر أي بيانات حسابك في Google
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                                ليس لدينا وصول إلى بيانات جدول البيانات الخاص بك
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">6. خدمات الطرف الثالث</h2>
+                        <p class="text-gray-700 leading-relaxed">لا تستخدم هذه الإضافة أي خدمات أو واجهات برمجة تطبيقات أو أدوات تحليل تابعة لجهات خارجية.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">7. خصوصية الأطفال</h2>
+                        <p class="text-gray-700 leading-relaxed">هذه الإضافة غير موجهة للأطفال دون سن 13 عامًا. نحن لا نجمع عن قصد أي معلومات من الأطفال.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">8. التغييرات على هذه السياسة</h2>
+                        <p class="text-gray-700 leading-relaxed">قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سيتم نشر التغييرات على هذه الصفحة مع تاريخ سريان محدث.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">9. اتصل بنا</h2>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <p class="text-gray-700 mb-4">إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال:</p>
+                            <div class="space-y-2">
+                                <p class="text-gray-700"><span class="font-semibold">المطور:</span> عاصم</p>
+                                <p class="text-gray-700"><span class="font-semibold">البريد الإلكتروني:</span> [YOUR_EMAIL]</p>
+                                <p class="text-gray-700"><span class="font-semibold">الموقع:</span> <a href="https://ko-fi.com/asimnet" class="text-primary-500 hover:text-primary-600 transition-colors">https://ko-fi.com/asimnet</a></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">مولد QR السريع</h3>
+                        <p class="text-gray-400 text-sm">أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">روابط</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">سياسة الخصوصية</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">شروط الخدمة</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">المساعدة والدعم</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">الدعم</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="ml-2">☕</span> اشترِ لي قهوة على Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        صنع بـ ❤️ بواسطة <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">عاصم</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 مولد QR السريع. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showLang(lang) {
+            const contentEn = document.getElementById('content-en');
+            const contentAr = document.getElementById('content-ar');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const html = document.documentElement;
+
+            if (lang === 'en') {
+                contentEn.classList.remove('hidden');
+                contentAr.classList.add('hidden');
+                btnEn.classList.remove('bg-gray-100', 'text-gray-700');
+                btnEn.classList.add('bg-primary-500', 'text-white');
+                btnAr.classList.remove('bg-primary-500', 'text-white');
+                btnAr.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+            } else {
+                contentEn.classList.add('hidden');
+                contentAr.classList.remove('hidden');
+                btnAr.classList.remove('bg-gray-100', 'text-gray-700');
+                btnAr.classList.add('bg-primary-500', 'text-white');
+                btnEn.classList.remove('bg-primary-500', 'text-white');
+                btnEn.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+            }
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                showLang(savedLang);
+            }
+        });
+    </script>
 </body>
 </html>

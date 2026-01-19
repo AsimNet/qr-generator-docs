@@ -1,300 +1,393 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast QR Generator - Google Sheets Add-on</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e8f0fe',
+                            100: '#d2e3fc',
+                            200: '#a8c7fa',
+                            300: '#7cacf8',
+                            400: '#4e91f5',
+                            500: '#1a73e8',
+                            600: '#1557b0',
+                            700: '#104d99',
+                            800: '#0d47a1',
+                            900: '#0a3069'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background: #f9f9f9;
-        }
-        .hero {
-            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
-            color: #fff;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .lang-switch {
-            text-align: center;
-            padding: 20px;
-            background: #fff;
-            border-bottom: 1px solid #eee;
-        }
-        .lang-switch a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 5px;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .lang-switch a:hover {
-            background: #1557b0;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-        .feature-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .feature-card .icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        .feature-card h3 {
-            color: #1a73e8;
-            margin-bottom: 10px;
-        }
-        .links-section {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin: 40px 0;
-        }
-        .links-section h2 {
-            color: #1a73e8;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .link-card {
-            display: block;
-            padding: 25px;
-            background: #f5f5f5;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .link-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .link-card .icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        .link-card h4 {
-            color: #1a73e8;
-            margin: 0;
-        }
-        .link-card p {
-            margin: 10px 0 0;
-            font-size: 0.9em;
-            color: #666;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: #fff;
-            color: #1a73e8;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-        .cta-button:hover {
-            transform: scale(1.05);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #333;
-            color: #fff;
-        }
-        footer a {
-            color: #90caf9;
-        }
-        .arabic {
-            direction: rtl;
-            text-align: right;
-        }
-        .arabic .hero, .arabic .feature-card, .arabic .links-section h2 {
-            text-align: center;
-        }
-        .hidden {
-            display: none;
+        [dir="rtl"] .rtl\:space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
         }
     </style>
 </head>
-<body>
-    <div class="lang-switch">
-        <a href="#" onclick="showLang('en')">English</a>
-        <a href="#" onclick="showLang('ar')">العربية</a>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- Language Switch Bar -->
+    <div class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
+                <a href="index.html" class="text-primary-500 font-semibold text-lg hover:text-primary-600 transition-colors">
+                    Fast QR Generator
+                </a>
+                <div class="flex items-center gap-2">
+                    <button onclick="showLang('en')" id="btn-en" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        English
+                    </button>
+                    <button onclick="showLang('ar')" id="btn-ar" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        العربية
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ENGLISH VERSION -->
     <div id="content-en">
-        <div class="hero">
-            <h1>Fast QR Generator</h1>
-            <p>Generate QR codes directly in your Google Sheets - fast, free, and privacy-focused</p>
-            <a href="https://workspace.google.com/marketplace/app/fast_qr_generator/YOUR_APP_ID" class="cta-button">Install Add-on</a>
-        </div>
-
-        <div class="container">
-            <div class="features">
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Generate hundreds of QR codes in seconds. Process multiple sheets simultaneously.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔒</div>
-                    <h3>Privacy First</h3>
-                    <p>All processing happens locally in your browser. No data is sent to external servers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🎯</div>
-                    <h3>Easy to Use</h3>
-                    <p>Simple interface - just select your data and generate QR codes with one click.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🆓</div>
-                    <h3>100% Free</h3>
-                    <p>No limits, no premium features, no hidden costs. Completely free to use.</p>
-                </div>
-            </div>
-
-            <div class="links-section">
-                <h2>Resources</h2>
-                <div class="links-grid">
-                    <a href="privacy-policy.html" class="link-card">
-                        <div class="icon">🔒</div>
-                        <h4>Privacy Policy</h4>
-                        <p>How we handle your data</p>
-                    </a>
-                    <a href="terms-of-service.html" class="link-card">
-                        <div class="icon">📜</div>
-                        <h4>Terms of Service</h4>
-                        <p>Usage terms and conditions</p>
-                    </a>
-                    <a href="support.html" class="link-card">
-                        <div class="icon">💬</div>
-                        <h4>Help & Support</h4>
-                        <p>Get help or report issues</p>
-                    </a>
-                    <a href="https://ko-fi.com/asimnet" class="link-card" target="_blank">
-                        <div class="icon">☕</div>
-                        <h4>Support Development</h4>
-                        <p>Buy me a coffee</p>
-                    </a>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                            Fast QR Generator
+                        </h1>
+                        <p class="text-lg md:text-xl text-primary-100 mb-8 max-w-xl">
+                            Generate QR codes directly in your Google Sheets - fast, free, and privacy-focused
+                        </p>
+                        <a href="https://workspace.google.com/marketplace/app/fast_qr_generator/YOUR_APP_ID"
+                           class="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-full hover:bg-primary-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Install Add-on
+                        </a>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-white/10 rounded-2xl blur-2xl transform rotate-3"></div>
+                            <img src="screenshots/screenshot.png"
+                                 alt="Fast QR Generator Screenshot"
+                                 class="relative rounded-2xl shadow-2xl border border-white/20 max-w-full h-auto transform hover:scale-[1.02] transition-transform duration-300"
+                                 style="max-height: 400px;">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <footer>
-            <p>Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank">Asim</a></p>
-            <p>© 2025 Fast QR Generator. All rights reserved.</p>
+        <!-- Features Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+                    Why Choose Fast QR Generator?
+                </h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    The simplest way to create QR codes in Google Sheets
+                </p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Lightning Fast</h3>
+                        <p class="text-gray-600">Generate hundreds of QR codes in seconds. Process multiple sheets simultaneously.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🔒</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Privacy First</h3>
+                        <p class="text-gray-600">All processing happens locally in your browser. No data is sent to external servers.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🎯</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">Easy to Use</h3>
+                        <p class="text-gray-600">Simple interface - just select your data and generate QR codes with one click.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🆓</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">100% Free</h3>
+                        <p class="text-gray-600">No limits, no premium features, no hidden costs. Completely free to use.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+                    Resources
+                </h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="privacy-policy.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">🔒</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">Privacy Policy</h4>
+                        <p class="text-gray-500 text-sm">How we handle your data</p>
+                    </a>
+                    <a href="terms-of-service.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">📜</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">Terms of Service</h4>
+                        <p class="text-gray-500 text-sm">Usage terms and conditions</p>
+                    </a>
+                    <a href="support.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">💬</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">Help & Support</h4>
+                        <p class="text-gray-500 text-sm">Get help or report issues</p>
+                    </a>
+                    <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">☕</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">Support Development</h4>
+                        <p class="text-gray-500 text-sm">Buy me a coffee</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Fast QR Generator</h3>
+                        <p class="text-gray-400 text-sm">Generate QR codes directly in Google Sheets - fast, free, and privacy-focused.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">Terms of Service</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">Help & Support</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="mr-2">☕</span> Buy me a coffee on Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">Asim</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 Fast QR Generator. All rights reserved.</p>
+                </div>
+            </div>
         </footer>
     </div>
 
     <!-- ARABIC VERSION -->
-    <div id="content-ar" class="arabic hidden">
-        <div class="hero">
-            <h1>مولد QR السريع</h1>
-            <p>أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك</p>
-            <a href="https://workspace.google.com/marketplace/app/fast_qr_generator/YOUR_APP_ID" class="cta-button">تثبيت الإضافة</a>
-        </div>
-
-        <div class="container">
-            <div class="features">
-                <div class="feature-card">
-                    <div class="icon">⚡</div>
-                    <h3>سريع للغاية</h3>
-                    <p>أنشئ مئات رموز QR في ثوانٍ. عالج أوراق متعددة في وقت واحد.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🔒</div>
-                    <h3>الخصوصية أولاً</h3>
-                    <p>تتم جميع المعالجة محلياً في متصفحك. لا يتم إرسال أي بيانات إلى خوادم خارجية.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🎯</div>
-                    <h3>سهل الاستخدام</h3>
-                    <p>واجهة بسيطة - حدد بياناتك وأنشئ رموز QR بنقرة واحدة.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">🆓</div>
-                    <h3>مجاني 100%</h3>
-                    <p>بدون قيود، بدون ميزات مدفوعة، بدون تكاليف خفية. مجاني تماماً.</p>
-                </div>
-            </div>
-
-            <div class="links-section">
-                <h2>الموارد</h2>
-                <div class="links-grid">
-                    <a href="privacy-policy.html" class="link-card">
-                        <div class="icon">🔒</div>
-                        <h4>سياسة الخصوصية</h4>
-                        <p>كيف نتعامل مع بياناتك</p>
-                    </a>
-                    <a href="terms-of-service.html" class="link-card">
-                        <div class="icon">📜</div>
-                        <h4>شروط الخدمة</h4>
-                        <p>شروط وأحكام الاستخدام</p>
-                    </a>
-                    <a href="support.html" class="link-card">
-                        <div class="icon">💬</div>
-                        <h4>المساعدة والدعم</h4>
-                        <p>احصل على مساعدة أو أبلغ عن مشكلة</p>
-                    </a>
-                    <a href="https://ko-fi.com/asimnet" class="link-card" target="_blank">
-                        <div class="icon">☕</div>
-                        <h4>ادعم التطوير</h4>
-                        <p>اشترِ لي قهوة</p>
-                    </a>
+    <div id="content-ar" class="hidden" dir="rtl">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-right">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                            مولد QR السريع
+                        </h1>
+                        <p class="text-lg md:text-xl text-primary-100 mb-8 max-w-xl md:mr-0 md:ml-auto">
+                            أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك
+                        </p>
+                        <a href="https://workspace.google.com/marketplace/app/fast_qr_generator/YOUR_APP_ID"
+                           class="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-full hover:bg-primary-50 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            تثبيت الإضافة
+                        </a>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-white/10 rounded-2xl blur-2xl transform -rotate-3"></div>
+                            <img src="screenshots/screenshot.png"
+                                 alt="لقطة شاشة مولد QR السريع"
+                                 class="relative rounded-2xl shadow-2xl border border-white/20 max-w-full h-auto transform hover:scale-[1.02] transition-transform duration-300"
+                                 style="max-height: 400px;">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <footer>
-            <p>صنع بـ ❤️ بواسطة <a href="https://ko-fi.com/asimnet" target="_blank">عاصم</a></p>
-            <p>© 2025 مولد QR السريع. جميع الحقوق محفوظة.</p>
+        <!-- Features Section -->
+        <section class="py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-4">
+                    لماذا تختار مولد QR السريع؟
+                </h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    أبسط طريقة لإنشاء رموز QR في جداول بيانات Google
+                </p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">سريع للغاية</h3>
+                        <p class="text-gray-600">أنشئ مئات رموز QR في ثوانٍ. عالج أوراق متعددة في وقت واحد.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🔒</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">الخصوصية أولاً</h3>
+                        <p class="text-gray-600">تتم جميع المعالجة محلياً في متصفحك. لا يتم إرسال أي بيانات إلى خوادم خارجية.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🎯</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">سهل الاستخدام</h3>
+                        <p class="text-gray-600">واجهة بسيطة - حدد بياناتك وأنشئ رموز QR بنقرة واحدة.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+                        <div class="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-4xl">🆓</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">مجاني 100%</h3>
+                        <p class="text-gray-600">بدون قيود، بدون ميزات مدفوعة، بدون تكاليف خفية. مجاني تماماً.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+                    الموارد
+                </h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="privacy-policy.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">🔒</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">سياسة الخصوصية</h4>
+                        <p class="text-gray-500 text-sm">كيف نتعامل مع بياناتك</p>
+                    </a>
+                    <a href="terms-of-service.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">📜</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">شروط الخدمة</h4>
+                        <p class="text-gray-500 text-sm">شروط وأحكام الاستخدام</p>
+                    </a>
+                    <a href="support.html" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">💬</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">المساعدة والدعم</h4>
+                        <p class="text-gray-500 text-sm">احصل على مساعدة أو أبلغ عن مشكلة</p>
+                    </a>
+                    <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-white rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:-translate-y-1">
+                        <div class="w-14 h-14 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-100 transition-colors">
+                            <span class="text-2xl">☕</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-primary-600 mb-2">ادعم التطوير</h4>
+                        <p class="text-gray-500 text-sm">اشترِ لي قهوة</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">مولد QR السريع</h3>
+                        <p class="text-gray-400 text-sm">أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">روابط</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">سياسة الخصوصية</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">شروط الخدمة</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">المساعدة والدعم</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">الدعم</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="ml-2">☕</span> اشترِ لي قهوة على Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        صنع بـ ❤️ بواسطة <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">عاصم</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 مولد QR السريع. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
         </footer>
     </div>
 
     <script>
         function showLang(lang) {
-            document.getElementById('content-en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('content-ar').classList.toggle('hidden', lang !== 'ar');
+            const contentEn = document.getElementById('content-en');
+            const contentAr = document.getElementById('content-ar');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const html = document.documentElement;
+
+            if (lang === 'en') {
+                contentEn.classList.remove('hidden');
+                contentAr.classList.add('hidden');
+                btnEn.classList.remove('bg-gray-100', 'text-gray-700');
+                btnEn.classList.add('bg-primary-500', 'text-white');
+                btnAr.classList.remove('bg-primary-500', 'text-white');
+                btnAr.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+            } else {
+                contentEn.classList.add('hidden');
+                contentAr.classList.remove('hidden');
+                btnAr.classList.remove('bg-gray-100', 'text-gray-700');
+                btnAr.classList.add('bg-primary-500', 'text-white');
+                btnEn.classList.remove('bg-primary-500', 'text-white');
+                btnEn.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+            }
+
+            // Save preference
+            localStorage.setItem('preferredLang', lang);
         }
+
+        // Load saved preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                showLang(savedLang);
+            }
+        });
     </script>
 </body>
 </html>

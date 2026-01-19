@@ -1,300 +1,526 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help & Support - Fast QR Generator</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background: #f9f9f9;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e8f0fe',
+                            100: '#d2e3fc',
+                            200: '#a8c7fa',
+                            300: '#7cacf8',
+                            400: '#4e91f5',
+                            500: '#1a73e8',
+                            600: '#1557b0',
+                            700: '#104d99',
+                            800: '#0d47a1',
+                            900: '#0a3069'
+                        }
+                    }
+                }
+            }
         }
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #1a73e8;
-            border-bottom: 3px solid #1a73e8;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #1a73e8;
-            margin-top: 30px;
-        }
-        h3 {
-            color: #333;
-            margin-top: 25px;
-        }
-        .lang-switch {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .lang-switch a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 5px;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .lang-switch a:hover {
-            background: #1557b0;
-        }
-        .support-card {
-            background: #e8f0fe;
-            padding: 25px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #1a73e8;
-        }
-        .support-card h3 {
-            margin-top: 0;
-            color: #1a73e8;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background: #1557b0;
-        }
-        .btn-secondary {
-            background: #34a853;
-        }
-        .btn-secondary:hover {
-            background: #2d8f47;
-        }
-        .faq-item {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-        .faq-item h4 {
-            color: #1a73e8;
-            margin: 0 0 10px 0;
-        }
-        .faq-item p {
-            margin: 0;
-        }
-        .contact {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        .arabic {
-            direction: rtl;
-            text-align: right;
-        }
-        .arabic .support-card {
-            border-left: none;
-            border-right: 4px solid #1a73e8;
-        }
-        ul {
-            padding-left: 25px;
-        }
-        .arabic ul {
-            padding-left: 0;
-            padding-right: 25px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        code {
-            background: #e8e8e8;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-link">← Back to Home</a>
-
-        <div class="lang-switch">
-            <a href="#english">English</a>
-            <a href="#arabic">العربية</a>
-        </div>
-
-        <!-- ENGLISH VERSION -->
-        <div id="english">
-            <h1>💬 Help & Support</h1>
-            <h2>Fast QR Generator Add-on for Google Sheets</h2>
-
-            <div class="support-card">
-                <h3>🐛 Report a Bug or Request a Feature</h3>
-                <p>Found a bug or have a feature request? Create an issue on our public GitHub repository. This helps us track and resolve issues efficiently.</p>
-                <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" class="btn" target="_blank">Create Issue on GitHub</a>
-            </div>
-
-            <div class="support-card">
-                <h3>☕ Support Development</h3>
-                <p>If you find this add-on useful, consider supporting its continued development. Your support helps keep this tool free for everyone!</p>
-                <a href="https://ko-fi.com/asimnet" class="btn btn-secondary" target="_blank">Buy Me a Coffee</a>
-            </div>
-
-            <h2>Frequently Asked Questions (FAQ)</h2>
-
-            <div class="faq-item">
-                <h4>How do I install the add-on?</h4>
-                <p>Go to Google Sheets → Extensions → Add-ons → Get add-ons → Search for "Fast QR Generator" → Click Install</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>Is my data safe?</h4>
-                <p>Yes! All QR code generation happens locally in your browser. No data is sent to external servers. Read our <a href="privacy-policy.html">Privacy Policy</a> for more details.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>Can I generate QR codes for multiple rows at once?</h4>
-                <p>Yes! Simply select the range containing your data and the add-on will generate QR codes for all selected cells.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>What size QR codes can I generate?</h4>
-                <p>You can customize the QR code size in the add-on settings. The default size works well for most use cases.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>The QR code is not scanning. What should I do?</h4>
-                <p>Try increasing the QR code size or reducing the amount of data encoded. Very long URLs or text may result in dense QR codes that are harder to scan.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>Is there a limit to how many QR codes I can generate?</h4>
-                <p>No! There are no limits. Generate as many QR codes as you need.</p>
-            </div>
-
-            <h2>How to Get Help</h2>
-            <ul>
-                <li><strong>Check the FAQ above</strong> - Your question might already be answered</li>
-                <li><strong>Search existing issues</strong> - Someone might have reported the same problem</li>
-                <li><strong>Create a new issue</strong> - Provide detailed information about your problem</li>
-            </ul>
-
-            <h2>When Reporting an Issue</h2>
-            <p>Please include:</p>
-            <ul>
-                <li>A clear description of the problem</li>
-                <li>Steps to reproduce the issue</li>
-                <li>What you expected to happen</li>
-                <li>What actually happened</li>
-                <li>Screenshots if applicable</li>
-                <li>Browser and operating system information</li>
-            </ul>
-
-            <div class="contact">
-                <h3>Contact</h3>
-                <p><strong>Developer:</strong> Asim</p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/AsimNet/qr-generator-docs/issues">Report Issues</a></p>
-                <p><strong>Support:</strong> <a href="https://ko-fi.com/asimnet">Ko-fi</a></p>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
+                <a href="index.html" class="text-primary-500 font-semibold text-lg hover:text-primary-600 transition-colors">
+                    Fast QR Generator
+                </a>
+                <div class="flex items-center gap-2">
+                    <button onclick="showLang('en')" id="btn-en" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        English
+                    </button>
+                    <button onclick="showLang('ar')" id="btn-ar" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        العربية
+                    </button>
+                </div>
             </div>
         </div>
+    </nav>
 
-        <hr style="margin: 50px 0;">
+    <!-- ENGLISH VERSION -->
+    <div id="content-en">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Home
+            </a>
 
-        <!-- ARABIC VERSION -->
-        <div id="arabic" class="arabic">
-            <a href="index.html" class="back-link">→ العودة للرئيسية</a>
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="mr-3">💬</span> Help & Support
+                    </h1>
+                    <h2 class="text-xl text-gray-600">Fast QR Generator Add-on for Google Sheets</h2>
+                </div>
 
-            <h1>💬 المساعدة والدعم</h1>
-            <h2>إضافة مولد QR السريع لجداول بيانات Google</h2>
+                <!-- Support Cards -->
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" target="_blank" class="bg-primary-50 border-l-4 border-primary-500 rounded-r-2xl p-6 hover:bg-primary-100 transition-colors group">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4 group-hover:bg-primary-200 transition-colors">
+                                <span class="text-2xl">🐛</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-primary-700 mb-2">Report a Bug or Request a Feature</h3>
+                                <p class="text-primary-600 text-sm mb-4">Found a bug or have a feature request? Create an issue on our public GitHub repository. This helps us track and resolve issues efficiently.</p>
+                                <span class="inline-flex items-center px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-medium group-hover:bg-primary-600 transition-colors">
+                                    Create Issue on GitHub
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
 
-            <div class="support-card">
-                <h3>🐛 الإبلاغ عن خطأ أو طلب ميزة</h3>
-                <p>وجدت خطأً أو لديك طلب ميزة؟ أنشئ issue في مستودع GitHub العام. هذا يساعدنا على تتبع المشكلات وحلها بكفاءة.</p>
-                <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" class="btn" target="_blank">إنشاء Issue في GitHub</a>
+                    <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-green-50 border-l-4 border-green-500 rounded-r-2xl p-6 hover:bg-green-100 transition-colors group">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4 group-hover:bg-green-200 transition-colors">
+                                <span class="text-2xl">☕</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-green-700 mb-2">Support Development</h3>
+                                <p class="text-green-600 text-sm mb-4">If you find this add-on useful, consider supporting its continued development. Your support helps keep this tool free for everyone!</p>
+                                <span class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium group-hover:bg-green-600 transition-colors">
+                                    Buy Me a Coffee
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- FAQ Section -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions (FAQ)</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">How do I install the add-on?</h4>
+                            <p class="text-gray-600">Go to Google Sheets → Extensions → Add-ons → Get add-ons → Search for "Fast QR Generator" → Click Install</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">Is my data safe?</h4>
+                            <p class="text-gray-600">Yes! All QR code generation happens locally in your browser. No data is sent to external servers. Read our <a href="privacy-policy.html" class="text-primary-500 hover:text-primary-600 underline">Privacy Policy</a> for more details.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">Can I generate QR codes for multiple rows at once?</h4>
+                            <p class="text-gray-600">Yes! Simply select the range containing your data and the add-on will generate QR codes for all selected cells.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">What size QR codes can I generate?</h4>
+                            <p class="text-gray-600">You can customize the QR code size in the add-on settings. The default size works well for most use cases.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">The QR code is not scanning. What should I do?</h4>
+                            <p class="text-gray-600">Try increasing the QR code size or reducing the amount of data encoded. Very long URLs or text may result in dense QR codes that are harder to scan.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">Is there a limit to how many QR codes I can generate?</h4>
+                            <p class="text-gray-600">No! There are no limits. Generate as many QR codes as you need.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How to Get Help -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">How to Get Help</h2>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">📖</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Check the FAQ above</h4>
+                            <p class="text-gray-600 text-sm">Your question might already be answered</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">🔍</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Search existing issues</h4>
+                            <p class="text-gray-600 text-sm">Someone might have reported the same problem</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">✍️</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Create a new issue</h4>
+                            <p class="text-gray-600 text-sm">Provide detailed information about your problem</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- When Reporting an Issue -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">When Reporting an Issue</h2>
+                    <p class="text-gray-700 mb-4">Please include:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">1</span>
+                            </div>
+                            <span class="text-gray-700">A clear description of the problem</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">2</span>
+                            </div>
+                            <span class="text-gray-700">Steps to reproduce the issue</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">3</span>
+                            </div>
+                            <span class="text-gray-700">What you expected to happen</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">4</span>
+                            </div>
+                            <span class="text-gray-700">What actually happened</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">5</span>
+                            </div>
+                            <span class="text-gray-700">Screenshots if applicable</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">6</span>
+                            </div>
+                            <span class="text-gray-700">Browser and operating system information</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Contact Section -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Contact</h2>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Developer</h4>
+                                <p class="text-gray-900 font-medium">Asim</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">GitHub</h4>
+                                <a href="https://github.com/AsimNet/qr-generator-docs/issues" target="_blank" class="text-primary-500 hover:text-primary-600 font-medium transition-colors">Report Issues</a>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Support</h4>
+                                <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-500 hover:text-primary-600 font-medium transition-colors">Ko-fi</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
+        </main>
 
-            <div class="support-card">
-                <h3>☕ ادعم التطوير</h3>
-                <p>إذا وجدت هذه الإضافة مفيدة، فكر في دعم استمرار تطويرها. دعمك يساعد في إبقاء هذه الأداة مجانية للجميع!</p>
-                <a href="https://ko-fi.com/asimnet" class="btn btn-secondary" target="_blank">اشترِ لي قهوة</a>
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Fast QR Generator</h3>
+                        <p class="text-gray-400 text-sm">Generate QR codes directly in Google Sheets - fast, free, and privacy-focused.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">Terms of Service</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">Help & Support</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="mr-2">☕</span> Buy me a coffee on Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">Asim</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 Fast QR Generator. All rights reserved.</p>
+                </div>
             </div>
-
-            <h2>الأسئلة الشائعة (FAQ)</h2>
-
-            <div class="faq-item">
-                <h4>كيف أثبت الإضافة؟</h4>
-                <p>اذهب إلى جداول بيانات Google ← الإضافات ← الحصول على إضافات ← ابحث عن "Fast QR Generator" ← انقر تثبيت</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>هل بياناتي آمنة؟</h4>
-                <p>نعم! تتم جميع عمليات توليد رموز QR محلياً في متصفحك. لا يتم إرسال أي بيانات إلى خوادم خارجية. اقرأ <a href="privacy-policy.html">سياسة الخصوصية</a> لمزيد من التفاصيل.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>هل يمكنني توليد رموز QR لصفوف متعددة في وقت واحد؟</h4>
-                <p>نعم! ما عليك سوى تحديد النطاق الذي يحتوي على بياناتك وستقوم الإضافة بتوليد رموز QR لجميع الخلايا المحددة.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>ما هو حجم رموز QR التي يمكنني توليدها؟</h4>
-                <p>يمكنك تخصيص حجم رمز QR في إعدادات الإضافة. الحجم الافتراضي يعمل بشكل جيد لمعظم الاستخدامات.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>رمز QR لا يُمسح. ماذا أفعل؟</h4>
-                <p>حاول زيادة حجم رمز QR أو تقليل كمية البيانات المشفرة. الروابط أو النصوص الطويلة جداً قد تنتج رموز QR كثيفة يصعب مسحها.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>هل هناك حد لعدد رموز QR التي يمكنني توليدها؟</h4>
-                <p>لا! لا توجد حدود. ولّد أي عدد تحتاجه من رموز QR.</p>
-            </div>
-
-            <h2>كيفية الحصول على المساعدة</h2>
-            <ul>
-                <li><strong>راجع الأسئلة الشائعة أعلاه</strong> - قد يكون سؤالك قد تمت الإجابة عليه بالفعل</li>
-                <li><strong>ابحث في المشكلات الموجودة</strong> - قد يكون شخص ما قد أبلغ عن نفس المشكلة</li>
-                <li><strong>أنشئ issue جديد</strong> - قدم معلومات مفصلة عن مشكلتك</li>
-            </ul>
-
-            <h2>عند الإبلاغ عن مشكلة</h2>
-            <p>يرجى تضمين:</p>
-            <ul>
-                <li>وصف واضح للمشكلة</li>
-                <li>خطوات إعادة إنتاج المشكلة</li>
-                <li>ما كنت تتوقع حدوثه</li>
-                <li>ما حدث فعلياً</li>
-                <li>لقطات شاشة إن أمكن</li>
-                <li>معلومات المتصفح ونظام التشغيل</li>
-            </ul>
-
-            <div class="contact">
-                <h3>التواصل</h3>
-                <p><strong>المطور:</strong> عاصم</p>
-                <p><strong>GitHub:</strong> <a href="https://github.com/AsimNet/qr-generator-docs/issues">الإبلاغ عن مشكلات</a></p>
-                <p><strong>الدعم:</strong> <a href="https://ko-fi.com/asimnet">Ko-fi</a></p>
-            </div>
-        </div>
+        </footer>
     </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="content-ar" class="hidden" dir="rtl">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                العودة للرئيسية
+            </a>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="ml-3">💬</span> المساعدة والدعم
+                    </h1>
+                    <h2 class="text-xl text-gray-600">إضافة مولد QR السريع لجداول بيانات Google</h2>
+                </div>
+
+                <!-- Support Cards -->
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" target="_blank" class="bg-primary-50 border-r-4 border-primary-500 rounded-l-2xl p-6 hover:bg-primary-100 transition-colors group">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center ml-4 group-hover:bg-primary-200 transition-colors">
+                                <span class="text-2xl">🐛</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-primary-700 mb-2">الإبلاغ عن خطأ أو طلب ميزة</h3>
+                                <p class="text-primary-600 text-sm mb-4">وجدت خطأً أو لديك طلب ميزة؟ أنشئ issue في مستودع GitHub العام. هذا يساعدنا على تتبع المشكلات وحلها بكفاءة.</p>
+                                <span class="inline-flex items-center px-4 py-2 bg-primary-500 text-white rounded-lg text-sm font-medium group-hover:bg-primary-600 transition-colors">
+                                    إنشاء Issue في GitHub
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-green-50 border-r-4 border-green-500 rounded-l-2xl p-6 hover:bg-green-100 transition-colors group">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center ml-4 group-hover:bg-green-200 transition-colors">
+                                <span class="text-2xl">☕</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-green-700 mb-2">ادعم التطوير</h3>
+                                <p class="text-green-600 text-sm mb-4">إذا وجدت هذه الإضافة مفيدة، فكر في دعم استمرار تطويرها. دعمك يساعد في إبقاء هذه الأداة مجانية للجميع!</p>
+                                <span class="inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-medium group-hover:bg-green-600 transition-colors">
+                                    اشترِ لي قهوة
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- FAQ Section -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">الأسئلة الشائعة (FAQ)</h2>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">كيف أثبت الإضافة؟</h4>
+                            <p class="text-gray-600">اذهب إلى جداول بيانات Google ← الإضافات ← الحصول على إضافات ← ابحث عن "Fast QR Generator" ← انقر تثبيت</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">هل بياناتي آمنة؟</h4>
+                            <p class="text-gray-600">نعم! تتم جميع عمليات توليد رموز QR محلياً في متصفحك. لا يتم إرسال أي بيانات إلى خوادم خارجية. اقرأ <a href="privacy-policy.html" class="text-primary-500 hover:text-primary-600 underline">سياسة الخصوصية</a> لمزيد من التفاصيل.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">هل يمكنني توليد رموز QR لصفوف متعددة في وقت واحد؟</h4>
+                            <p class="text-gray-600">نعم! ما عليك سوى تحديد النطاق الذي يحتوي على بياناتك وستقوم الإضافة بتوليد رموز QR لجميع الخلايا المحددة.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">ما هو حجم رموز QR التي يمكنني توليدها؟</h4>
+                            <p class="text-gray-600">يمكنك تخصيص حجم رمز QR في إعدادات الإضافة. الحجم الافتراضي يعمل بشكل جيد لمعظم الاستخدامات.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">رمز QR لا يُمسح. ماذا أفعل؟</h4>
+                            <p class="text-gray-600">حاول زيادة حجم رمز QR أو تقليل كمية البيانات المشفرة. الروابط أو النصوص الطويلة جداً قد تنتج رموز QR كثيفة يصعب مسحها.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors">
+                            <h4 class="font-semibold text-primary-600 mb-2">هل هناك حد لعدد رموز QR التي يمكنني توليدها؟</h4>
+                            <p class="text-gray-600">لا! لا توجد حدود. ولّد أي عدد تحتاجه من رموز QR.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How to Get Help -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">كيفية الحصول على المساعدة</h2>
+                    <div class="grid sm:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">📖</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">راجع الأسئلة الشائعة أعلاه</h4>
+                            <p class="text-gray-600 text-sm">قد يكون سؤالك قد تمت الإجابة عليه بالفعل</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">🔍</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">ابحث في المشكلات الموجودة</h4>
+                            <p class="text-gray-600 text-sm">قد يكون شخص ما قد أبلغ عن نفس المشكلة</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 text-center">
+                            <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="text-xl">✍️</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">أنشئ issue جديد</h4>
+                            <p class="text-gray-600 text-sm">قدم معلومات مفصلة عن مشكلتك</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- When Reporting an Issue -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">عند الإبلاغ عن مشكلة</h2>
+                    <p class="text-gray-700 mb-4">يرجى تضمين:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">1</span>
+                            </div>
+                            <span class="text-gray-700">وصف واضح للمشكلة</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">2</span>
+                            </div>
+                            <span class="text-gray-700">خطوات إعادة إنتاج المشكلة</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">3</span>
+                            </div>
+                            <span class="text-gray-700">ما كنت تتوقع حدوثه</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">4</span>
+                            </div>
+                            <span class="text-gray-700">ما حدث فعلياً</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">5</span>
+                            </div>
+                            <span class="text-gray-700">لقطات شاشة إن أمكن</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 bg-primary-100 rounded-full flex items-center justify-center ml-3 mt-0.5 flex-shrink-0">
+                                <span class="text-primary-600 text-xs font-bold">6</span>
+                            </div>
+                            <span class="text-gray-700">معلومات المتصفح ونظام التشغيل</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Contact Section -->
+                <section>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">التواصل</h2>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="grid sm:grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">المطور</h4>
+                                <p class="text-gray-900 font-medium">عاصم</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">GitHub</h4>
+                                <a href="https://github.com/AsimNet/qr-generator-docs/issues" target="_blank" class="text-primary-500 hover:text-primary-600 font-medium transition-colors">الإبلاغ عن مشكلات</a>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">الدعم</h4>
+                                <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-500 hover:text-primary-600 font-medium transition-colors">Ko-fi</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">مولد QR السريع</h3>
+                        <p class="text-gray-400 text-sm">أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">روابط</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">سياسة الخصوصية</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">شروط الخدمة</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">المساعدة والدعم</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">الدعم</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="ml-2">☕</span> اشترِ لي قهوة على Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        صنع بـ ❤️ بواسطة <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">عاصم</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 مولد QR السريع. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showLang(lang) {
+            const contentEn = document.getElementById('content-en');
+            const contentAr = document.getElementById('content-ar');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const html = document.documentElement;
+
+            if (lang === 'en') {
+                contentEn.classList.remove('hidden');
+                contentAr.classList.add('hidden');
+                btnEn.classList.remove('bg-gray-100', 'text-gray-700');
+                btnEn.classList.add('bg-primary-500', 'text-white');
+                btnAr.classList.remove('bg-primary-500', 'text-white');
+                btnAr.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+            } else {
+                contentEn.classList.add('hidden');
+                contentAr.classList.remove('hidden');
+                btnAr.classList.remove('bg-gray-100', 'text-gray-700');
+                btnAr.classList.add('bg-primary-500', 'text-white');
+                btnEn.classList.remove('bg-primary-500', 'text-white');
+                btnEn.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+            }
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                showLang(savedLang);
+            }
+        });
+    </script>
 </body>
 </html>

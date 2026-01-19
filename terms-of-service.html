@@ -1,270 +1,594 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - Fast QR Generator</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background: #f9f9f9;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#e8f0fe',
+                            100: '#d2e3fc',
+                            200: '#a8c7fa',
+                            300: '#7cacf8',
+                            400: '#4e91f5',
+                            500: '#1a73e8',
+                            600: '#1557b0',
+                            700: '#104d99',
+                            800: '#0d47a1',
+                            900: '#0a3069'
+                        }
+                    }
+                }
+            }
         }
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #1a73e8;
-            border-bottom: 3px solid #1a73e8;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #1a73e8;
-            margin-top: 30px;
-        }
-        .lang-switch {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .lang-switch a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 0 5px;
-            background: #1a73e8;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .lang-switch a:hover {
-            background: #1557b0;
-        }
-        .effective-date {
-            background: #e8f0fe;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        ul {
-            padding-left: 25px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .contact {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-        .arabic {
-            direction: rtl;
-            text-align: right;
-        }
-        .highlight {
-            background: #fff3e0;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #ff9800;
-            margin: 15px 0;
-        }
-        .arabic .highlight {
-            border-left: none;
-            border-right: 4px solid #ff9800;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <div class="lang-switch">
-            <a href="#english">English</a>
-            <a href="#arabic">العربية</a>
-        </div>
-
-        <!-- ENGLISH VERSION -->
-        <div id="english">
-            <h1>📜 Terms of Service</h1>
-            <h2>Fast QR Generator Add-on for Google Sheets</h2>
-            
-            <div class="effective-date">
-                <strong>Effective Date:</strong> January 2025
-            </div>
-
-            <h2>1. Acceptance of Terms</h2>
-            <p>By installing and using Fast QR Generator ("the Add-on"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Add-on.</p>
-
-            <h2>2. Description of Service</h2>
-            <p>Fast QR Generator is a Google Sheets add-on that allows users to:</p>
-            <ul>
-                <li>Generate QR codes from spreadsheet data</li>
-                <li>Insert QR code images directly into cells</li>
-                <li>Process multiple sheets simultaneously</li>
-                <li>Customize QR code size</li>
-            </ul>
-
-            <h2>3. License</h2>
-            <p>We grant you a limited, non-exclusive, non-transferable, revocable license to use the Add-on for personal or commercial purposes, subject to these Terms.</p>
-
-            <h2>4. User Responsibilities</h2>
-            <p>You agree to:</p>
-            <ul>
-                <li>Use the Add-on only for lawful purposes</li>
-                <li>Not attempt to reverse engineer, modify, or distribute the Add-on</li>
-                <li>Not use the Add-on to generate QR codes for illegal or harmful content</li>
-                <li>Ensure you have the right to use any data you process with the Add-on</li>
-            </ul>
-
-            <h2>5. Intellectual Property</h2>
-            <p>The Add-on, including its code, design, and documentation, is owned by the developer. QR codes you generate using your own data are yours.</p>
-
-            <h2>6. Disclaimer of Warranties</h2>
-            <div class="highlight">
-                <p>THE ADD-ON IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE DO NOT GUARANTEE THAT:</p>
-                <ul>
-                    <li>The Add-on will be error-free or uninterrupted</li>
-                    <li>Generated QR codes will be scannable by all devices</li>
-                    <li>The Add-on will meet all your requirements</li>
-                </ul>
-            </div>
-
-            <h2>7. Limitation of Liability</h2>
-            <p>To the maximum extent permitted by law, the developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
-            <ul>
-                <li>Loss of data</li>
-                <li>Loss of profits</li>
-                <li>Business interruption</li>
-                <li>Any damages arising from QR code scanning failures</li>
-            </ul>
-
-            <h2>8. Free Service</h2>
-            <p>The Add-on is provided free of charge. We reserve the right to:</p>
-            <ul>
-                <li>Modify features at any time</li>
-                <li>Discontinue the service with reasonable notice</li>
-                <li>Introduce premium features in the future</li>
-            </ul>
-
-            <h2>9. Support</h2>
-            <p>Support is provided on a best-effort basis. You can:</p>
-            <ul>
-                <li>Report issues via email</li>
-                <li>Support development via <a href="https://ko-fi.com/asimnet">Ko-fi</a></li>
-            </ul>
-
-            <h2>10. Changes to Terms</h2>
-            <p>We may update these Terms from time to time. Continued use of the Add-on after changes constitutes acceptance of the new Terms.</p>
-
-            <h2>11. Termination</h2>
-            <p>You may stop using the Add-on at any time by uninstalling it. We may terminate your access if you violate these Terms.</p>
-
-            <h2>12. Governing Law</h2>
-            <p>These Terms shall be governed by the laws of Saudi Arabia.</p>
-
-            <h2>13. Contact</h2>
-            <div class="contact">
-                <p>For questions about these Terms, contact:</p>
-                <p><strong>Developer:</strong> Asim</p>
-                <p><strong>Email:</strong> [YOUR_EMAIL]</p>
-                <p><strong>Website:</strong> <a href="https://ko-fi.com/asimnet">https://ko-fi.com/asimnet</a></p>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-3">
+                <a href="index.html" class="text-primary-500 font-semibold text-lg hover:text-primary-600 transition-colors">
+                    Fast QR Generator
+                </a>
+                <div class="flex items-center gap-2">
+                    <button onclick="showLang('en')" id="btn-en" class="px-4 py-2 rounded-lg text-sm font-medium bg-primary-500 text-white hover:bg-primary-600 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        English
+                    </button>
+                    <button onclick="showLang('ar')" id="btn-ar" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                        العربية
+                    </button>
+                </div>
             </div>
         </div>
+    </nav>
 
-        <hr style="margin: 50px 0;">
+    <!-- ENGLISH VERSION -->
+    <div id="content-en">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Home
+            </a>
 
-        <!-- ARABIC VERSION -->
-        <div id="arabic" class="arabic">
-            <h1>📜 شروط الخدمة</h1>
-            <h2>إضافة مولد QR السريع لجداول بيانات Google</h2>
-            
-            <div class="effective-date">
-                <strong>تاريخ السريان:</strong> يناير 2025
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="mr-3">📜</span> Terms of Service
+                    </h1>
+                    <h2 class="text-xl text-gray-600">Fast QR Generator Add-on for Google Sheets</h2>
+                </div>
+
+                <!-- Effective Date -->
+                <div class="bg-primary-50 border border-primary-100 rounded-xl p-4 mb-8">
+                    <p class="text-primary-700 font-medium">
+                        <span class="font-semibold">Effective Date:</span> January 2025
+                    </p>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-8">
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">1. Acceptance of Terms</h2>
+                        <p class="text-gray-700 leading-relaxed">By installing and using Fast QR Generator ("the Add-on"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Add-on.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">2. Description of Service</h2>
+                        <p class="text-gray-700 mb-4">Fast QR Generator is a Google Sheets add-on that allows users to:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                Generate QR codes from spreadsheet data
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                Insert QR code images directly into cells
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                Process multiple sheets simultaneously
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                Customize QR code size
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">3. License</h2>
+                        <p class="text-gray-700 leading-relaxed">We grant you a limited, non-exclusive, non-transferable, revocable license to use the Add-on for personal or commercial purposes, subject to these Terms.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">4. User Responsibilities</h2>
+                        <p class="text-gray-700 mb-4">You agree to:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Use the Add-on only for lawful purposes
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Not attempt to reverse engineer, modify, or distribute the Add-on
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Not use the Add-on to generate QR codes for illegal or harmful content
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Ensure you have the right to use any data you process with the Add-on
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">5. Intellectual Property</h2>
+                        <p class="text-gray-700 leading-relaxed">The Add-on, including its code, design, and documentation, is owned by the developer. QR codes you generate using your own data are yours.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">6. Disclaimer of Warranties</h2>
+                        <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-xl p-4 mb-4">
+                            <p class="text-amber-800 font-medium mb-2">THE ADD-ON IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE DO NOT GUARANTEE THAT:</p>
+                            <ul class="space-y-1 text-amber-700 text-sm">
+                                <li>• The Add-on will be error-free or uninterrupted</li>
+                                <li>• Generated QR codes will be scannable by all devices</li>
+                                <li>• The Add-on will meet all your requirements</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">7. Limitation of Liability</h2>
+                        <p class="text-gray-700 mb-4">To the maximum extent permitted by law, the developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Loss of data
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Loss of profits
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Business interruption
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Any damages arising from QR code scanning failures
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">8. Free Service</h2>
+                        <p class="text-gray-700 mb-4">The Add-on is provided free of charge. We reserve the right to:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Modify features at any time
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Discontinue the service with reasonable notice
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Introduce premium features in the future
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">9. Support</h2>
+                        <p class="text-gray-700 mb-4">Support is provided on a best-effort basis. You can:</p>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="support.html" class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors group">
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">Report Issues</h4>
+                                <p class="text-gray-600 text-sm">Get help via our support page</p>
+                            </a>
+                            <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors group">
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">Support Development</h4>
+                                <p class="text-gray-600 text-sm">Buy me a coffee on Ko-fi</p>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">10. Changes to Terms</h2>
+                        <p class="text-gray-700 leading-relaxed">We may update these Terms from time to time. Continued use of the Add-on after changes constitutes acceptance of the new Terms.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">11. Termination</h2>
+                        <p class="text-gray-700 leading-relaxed">You may stop using the Add-on at any time by uninstalling it. We may terminate your access if you violate these Terms.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">12. Governing Law</h2>
+                        <p class="text-gray-700 leading-relaxed">These Terms shall be governed by the laws of Saudi Arabia.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">13. Contact</h2>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <p class="text-gray-700 mb-4">For questions about these Terms, contact:</p>
+                            <div class="space-y-2">
+                                <p class="text-gray-700"><span class="font-semibold">Developer:</span> Asim</p>
+                                <p class="text-gray-700"><span class="font-semibold">Email:</span> [YOUR_EMAIL]</p>
+                                <p class="text-gray-700"><span class="font-semibold">Website:</span> <a href="https://ko-fi.com/asimnet" class="text-primary-500 hover:text-primary-600 transition-colors">https://ko-fi.com/asimnet</a></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
+        </main>
 
-            <h2>1. قبول الشروط</h2>
-            <p>بتثبيت واستخدام مولد QR السريع ("الإضافة")، فإنك توافق على الالتزام بشروط الخدمة هذه. إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام الإضافة.</p>
-
-            <h2>2. وصف الخدمة</h2>
-            <p>مولد QR السريع هو إضافة لجداول بيانات Google تتيح للمستخدمين:</p>
-            <ul>
-                <li>توليد رموز QR من بيانات جدول البيانات</li>
-                <li>إدراج صور رموز QR مباشرة في الخلايا</li>
-                <li>معالجة أوراق متعددة في وقت واحد</li>
-                <li>تخصيص حجم رمز QR</li>
-            </ul>
-
-            <h2>3. الترخيص</h2>
-            <p>نمنحك ترخيصًا محدودًا وغير حصري وغير قابل للتحويل وقابل للإلغاء لاستخدام الإضافة للأغراض الشخصية أو التجارية، وفقًا لهذه الشروط.</p>
-
-            <h2>4. مسؤوليات المستخدم</h2>
-            <p>أنت توافق على:</p>
-            <ul>
-                <li>استخدام الإضافة فقط لأغراض قانونية</li>
-                <li>عدم محاولة الهندسة العكسية أو تعديل أو توزيع الإضافة</li>
-                <li>عدم استخدام الإضافة لتوليد رموز QR لمحتوى غير قانوني أو ضار</li>
-                <li>التأكد من أن لديك الحق في استخدام أي بيانات تعالجها بالإضافة</li>
-            </ul>
-
-            <h2>5. الملكية الفكرية</h2>
-            <p>الإضافة، بما في ذلك كودها وتصميمها ووثائقها، مملوكة للمطور. رموز QR التي تولدها باستخدام بياناتك الخاصة ملكك.</p>
-
-            <h2>6. إخلاء المسؤولية عن الضمانات</h2>
-            <div class="highlight">
-                <p>يتم توفير الإضافة "كما هي" دون أي ضمان من أي نوع. نحن لا نضمن أن:</p>
-                <ul>
-                    <li>ستكون الإضافة خالية من الأخطاء أو غير منقطعة</li>
-                    <li>ستكون رموز QR المولدة قابلة للمسح بجميع الأجهزة</li>
-                    <li>ستلبي الإضافة جميع متطلباتك</li>
-                </ul>
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Fast QR Generator</h3>
+                        <p class="text-gray-400 text-sm">Generate QR codes directly in Google Sheets - fast, free, and privacy-focused.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Links</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">Privacy Policy</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">Terms of Service</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">Help & Support</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Support</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="mr-2">☕</span> Buy me a coffee on Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">Asim</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 Fast QR Generator. All rights reserved.</p>
+                </div>
             </div>
-
-            <h2>7. تحديد المسؤولية</h2>
-            <p>إلى أقصى حد يسمح به القانون، لن يكون المطور مسؤولاً عن أي أضرار غير مباشرة أو عرضية أو خاصة أو تبعية أو عقابية، بما في ذلك على سبيل المثال لا الحصر:</p>
-            <ul>
-                <li>فقدان البيانات</li>
-                <li>فقدان الأرباح</li>
-                <li>انقطاع الأعمال</li>
-                <li>أي أضرار ناتجة عن فشل مسح رموز QR</li>
-            </ul>
-
-            <h2>8. خدمة مجانية</h2>
-            <p>يتم توفير الإضافة مجانًا. نحتفظ بالحق في:</p>
-            <ul>
-                <li>تعديل الميزات في أي وقت</li>
-                <li>إيقاف الخدمة مع إشعار معقول</li>
-                <li>تقديم ميزات مميزة في المستقبل</li>
-            </ul>
-
-            <h2>9. الدعم</h2>
-            <p>يتم تقديم الدعم على أساس أفضل جهد. يمكنك:</p>
-            <ul>
-                <li>الإبلاغ عن المشكلات عبر البريد الإلكتروني</li>
-                <li>دعم التطوير عبر <a href="https://ko-fi.com/asimnet">Ko-fi</a></li>
-            </ul>
-
-            <h2>10. التغييرات على الشروط</h2>
-            <p>قد نقوم بتحديث هذه الشروط من وقت لآخر. يشكل الاستمرار في استخدام الإضافة بعد التغييرات قبولاً للشروط الجديدة.</p>
-
-            <h2>11. الإنهاء</h2>
-            <p>يمكنك التوقف عن استخدام الإضافة في أي وقت عن طريق إلغاء تثبيتها. قد ننهي وصولك إذا انتهكت هذه الشروط.</p>
-
-            <h2>12. القانون الحاكم</h2>
-            <p>تخضع هذه الشروط لقوانين المملكة العربية السعودية.</p>
-
-            <h2>13. اتصل بنا</h2>
-            <div class="contact">
-                <p>للأسئلة حول هذه الشروط، اتصل بـ:</p>
-                <p><strong>المطور:</strong> عاصم</p>
-                <p><strong>البريد الإلكتروني:</strong> [YOUR_EMAIL]</p>
-                <p><strong>الموقع:</strong> <a href="https://ko-fi.com/asimnet">https://ko-fi.com/asimnet</a></p>
-            </div>
-        </div>
+        </footer>
     </div>
+
+    <!-- ARABIC VERSION -->
+    <div id="content-ar" class="hidden" dir="rtl">
+        <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Back Link -->
+            <a href="index.html" class="inline-flex items-center text-primary-500 hover:text-primary-600 transition-colors mb-8">
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                العودة للرئيسية
+            </a>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
+                <!-- Header -->
+                <div class="border-b border-gray-200 pb-6 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold text-primary-600 mb-2 flex items-center">
+                        <span class="ml-3">📜</span> شروط الخدمة
+                    </h1>
+                    <h2 class="text-xl text-gray-600">إضافة مولد QR السريع لجداول بيانات Google</h2>
+                </div>
+
+                <!-- Effective Date -->
+                <div class="bg-primary-50 border border-primary-100 rounded-xl p-4 mb-8">
+                    <p class="text-primary-700 font-medium">
+                        <span class="font-semibold">تاريخ السريان:</span> يناير 2025
+                    </p>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-8">
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">1. قبول الشروط</h2>
+                        <p class="text-gray-700 leading-relaxed">بتثبيت واستخدام مولد QR السريع ("الإضافة")، فإنك توافق على الالتزام بشروط الخدمة هذه. إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام الإضافة.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">2. وصف الخدمة</h2>
+                        <p class="text-gray-700 mb-4">مولد QR السريع هو إضافة لجداول بيانات Google تتيح للمستخدمين:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                توليد رموز QR من بيانات جدول البيانات
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                إدراج صور رموز QR مباشرة في الخلايا
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                معالجة أوراق متعددة في وقت واحد
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                                </svg>
+                                تخصيص حجم رمز QR
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">3. الترخيص</h2>
+                        <p class="text-gray-700 leading-relaxed">نمنحك ترخيصًا محدودًا وغير حصري وغير قابل للتحويل وقابل للإلغاء لاستخدام الإضافة للأغراض الشخصية أو التجارية، وفقًا لهذه الشروط.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">4. مسؤوليات المستخدم</h2>
+                        <p class="text-gray-700 mb-4">أنت توافق على:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                استخدام الإضافة فقط لأغراض قانونية
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                عدم محاولة الهندسة العكسية أو تعديل أو توزيع الإضافة
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                عدم استخدام الإضافة لتوليد رموز QR لمحتوى غير قانوني أو ضار
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-green-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                التأكد من أن لديك الحق في استخدام أي بيانات تعالجها بالإضافة
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">5. الملكية الفكرية</h2>
+                        <p class="text-gray-700 leading-relaxed">الإضافة، بما في ذلك كودها وتصميمها ووثائقها، مملوكة للمطور. رموز QR التي تولدها باستخدام بياناتك الخاصة ملكك.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">6. إخلاء المسؤولية عن الضمانات</h2>
+                        <div class="bg-amber-50 border-r-4 border-amber-500 rounded-l-xl p-4 mb-4">
+                            <p class="text-amber-800 font-medium mb-2">يتم توفير الإضافة "كما هي" دون أي ضمان من أي نوع. نحن لا نضمن أن:</p>
+                            <ul class="space-y-1 text-amber-700 text-sm">
+                                <li>• ستكون الإضافة خالية من الأخطاء أو غير منقطعة</li>
+                                <li>• ستكون رموز QR المولدة قابلة للمسح بجميع الأجهزة</li>
+                                <li>• ستلبي الإضافة جميع متطلباتك</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">7. تحديد المسؤولية</h2>
+                        <p class="text-gray-700 mb-4">إلى أقصى حد يسمح به القانون، لن يكون المطور مسؤولاً عن أي أضرار غير مباشرة أو عرضية أو خاصة أو تبعية أو عقابية، بما في ذلك على سبيل المثال لا الحصر:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                فقدان البيانات
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                فقدان الأرباح
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                انقطاع الأعمال
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-red-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                أي أضرار ناتجة عن فشل مسح رموز QR
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">8. خدمة مجانية</h2>
+                        <p class="text-gray-700 mb-4">يتم توفير الإضافة مجانًا. نحتفظ بالحق في:</p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                تعديل الميزات في أي وقت
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                إيقاف الخدمة مع إشعار معقول
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-primary-500 ml-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                تقديم ميزات مميزة في المستقبل
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">9. الدعم</h2>
+                        <p class="text-gray-700 mb-4">يتم تقديم الدعم على أساس أفضل جهد. يمكنك:</p>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <a href="support.html" class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors group">
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">الإبلاغ عن مشكلات</h4>
+                                <p class="text-gray-600 text-sm">احصل على مساعدة عبر صفحة الدعم</p>
+                            </a>
+                            <a href="https://ko-fi.com/asimnet" target="_blank" class="bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-colors group">
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors">ادعم التطوير</h4>
+                                <p class="text-gray-600 text-sm">اشترِ لي قهوة على Ko-fi</p>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">10. التغييرات على الشروط</h2>
+                        <p class="text-gray-700 leading-relaxed">قد نقوم بتحديث هذه الشروط من وقت لآخر. يشكل الاستمرار في استخدام الإضافة بعد التغييرات قبولاً للشروط الجديدة.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">11. الإنهاء</h2>
+                        <p class="text-gray-700 leading-relaxed">يمكنك التوقف عن استخدام الإضافة في أي وقت عن طريق إلغاء تثبيتها. قد ننهي وصولك إذا انتهكت هذه الشروط.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">12. القانون الحاكم</h2>
+                        <p class="text-gray-700 leading-relaxed">تخضع هذه الشروط لقوانين المملكة العربية السعودية.</p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl font-semibold text-primary-600 mb-4">13. اتصل بنا</h2>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <p class="text-gray-700 mb-4">للأسئلة حول هذه الشروط، اتصل بـ:</p>
+                            <div class="space-y-2">
+                                <p class="text-gray-700"><span class="font-semibold">المطور:</span> عاصم</p>
+                                <p class="text-gray-700"><span class="font-semibold">البريد الإلكتروني:</span> [YOUR_EMAIL]</p>
+                                <p class="text-gray-700"><span class="font-semibold">الموقع:</span> <a href="https://ko-fi.com/asimnet" class="text-primary-500 hover:text-primary-600 transition-colors">https://ko-fi.com/asimnet</a></p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12 mt-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">مولد QR السريع</h3>
+                        <p class="text-gray-400 text-sm">أنشئ رموز QR مباشرة في جداول بيانات Google - سريع، مجاني، ويحافظ على خصوصيتك.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">روابط</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="privacy-policy.html" class="text-gray-400 hover:text-primary-300 transition-colors">سياسة الخصوصية</a></li>
+                            <li><a href="terms-of-service.html" class="text-gray-400 hover:text-primary-300 transition-colors">شروط الخدمة</a></li>
+                            <li><a href="support.html" class="text-gray-400 hover:text-primary-300 transition-colors">المساعدة والدعم</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">الدعم</h3>
+                        <a href="https://ko-fi.com/asimnet" target="_blank" class="inline-flex items-center text-gray-400 hover:text-primary-300 transition-colors text-sm">
+                            <span class="ml-2">☕</span> اشترِ لي قهوة على Ko-fi
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        صنع بـ ❤️ بواسطة <a href="https://ko-fi.com/asimnet" target="_blank" class="text-primary-300 hover:text-primary-200 transition-colors">عاصم</a>
+                    </p>
+                    <p class="text-gray-500 text-sm mt-2">© 2025 مولد QR السريع. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showLang(lang) {
+            const contentEn = document.getElementById('content-en');
+            const contentAr = document.getElementById('content-ar');
+            const btnEn = document.getElementById('btn-en');
+            const btnAr = document.getElementById('btn-ar');
+            const html = document.documentElement;
+
+            if (lang === 'en') {
+                contentEn.classList.remove('hidden');
+                contentAr.classList.add('hidden');
+                btnEn.classList.remove('bg-gray-100', 'text-gray-700');
+                btnEn.classList.add('bg-primary-500', 'text-white');
+                btnAr.classList.remove('bg-primary-500', 'text-white');
+                btnAr.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+            } else {
+                contentEn.classList.add('hidden');
+                contentAr.classList.remove('hidden');
+                btnAr.classList.remove('bg-gray-100', 'text-gray-700');
+                btnAr.classList.add('bg-primary-500', 'text-white');
+                btnEn.classList.remove('bg-primary-500', 'text-white');
+                btnEn.classList.add('bg-gray-100', 'text-gray-700');
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+            }
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                showLang(savedLang);
+            }
+        });
+    </script>
 </body>
 </html>

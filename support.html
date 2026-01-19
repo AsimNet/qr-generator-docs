@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Fast QR Generator</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            background: #f9f9f9;
+        }
+        .container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a73e8;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #1a73e8;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #333;
+            margin-top: 25px;
+        }
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .lang-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 5px;
+            background: #1a73e8;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .lang-switch a:hover {
+            background: #1557b0;
+        }
+        .support-card {
+            background: #e8f0fe;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #1a73e8;
+        }
+        .support-card h3 {
+            margin-top: 0;
+            color: #1a73e8;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #1a73e8;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #1557b0;
+        }
+        .btn-secondary {
+            background: #34a853;
+        }
+        .btn-secondary:hover {
+            background: #2d8f47;
+        }
+        .faq-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .faq-item h4 {
+            color: #1a73e8;
+            margin: 0 0 10px 0;
+        }
+        .faq-item p {
+            margin: 0;
+        }
+        .contact {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .arabic {
+            direction: rtl;
+            text-align: right;
+        }
+        .arabic .support-card {
+            border-left: none;
+            border-right: 4px solid #1a73e8;
+        }
+        ul {
+            padding-left: 25px;
+        }
+        .arabic ul {
+            padding-left: 0;
+            padding-right: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <div class="lang-switch">
+            <a href="#english">English</a>
+            <a href="#arabic">العربية</a>
+        </div>
+
+        <!-- ENGLISH VERSION -->
+        <div id="english">
+            <h1>💬 Help & Support</h1>
+            <h2>Fast QR Generator Add-on for Google Sheets</h2>
+
+            <div class="support-card">
+                <h3>🐛 Report a Bug or Request a Feature</h3>
+                <p>Found a bug or have a feature request? Create an issue on our public GitHub repository. This helps us track and resolve issues efficiently.</p>
+                <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" class="btn" target="_blank">Create Issue on GitHub</a>
+            </div>
+
+            <div class="support-card">
+                <h3>☕ Support Development</h3>
+                <p>If you find this add-on useful, consider supporting its continued development. Your support helps keep this tool free for everyone!</p>
+                <a href="https://ko-fi.com/asimnet" class="btn btn-secondary" target="_blank">Buy Me a Coffee</a>
+            </div>
+
+            <h2>Frequently Asked Questions (FAQ)</h2>
+
+            <div class="faq-item">
+                <h4>How do I install the add-on?</h4>
+                <p>Go to Google Sheets → Extensions → Add-ons → Get add-ons → Search for "Fast QR Generator" → Click Install</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Is my data safe?</h4>
+                <p>Yes! All QR code generation happens locally in your browser. No data is sent to external servers. Read our <a href="privacy-policy.html">Privacy Policy</a> for more details.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I generate QR codes for multiple rows at once?</h4>
+                <p>Yes! Simply select the range containing your data and the add-on will generate QR codes for all selected cells.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What size QR codes can I generate?</h4>
+                <p>You can customize the QR code size in the add-on settings. The default size works well for most use cases.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>The QR code is not scanning. What should I do?</h4>
+                <p>Try increasing the QR code size or reducing the amount of data encoded. Very long URLs or text may result in dense QR codes that are harder to scan.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Is there a limit to how many QR codes I can generate?</h4>
+                <p>No! There are no limits. Generate as many QR codes as you need.</p>
+            </div>
+
+            <h2>How to Get Help</h2>
+            <ul>
+                <li><strong>Check the FAQ above</strong> - Your question might already be answered</li>
+                <li><strong>Search existing issues</strong> - Someone might have reported the same problem</li>
+                <li><strong>Create a new issue</strong> - Provide detailed information about your problem</li>
+            </ul>
+
+            <h2>When Reporting an Issue</h2>
+            <p>Please include:</p>
+            <ul>
+                <li>A clear description of the problem</li>
+                <li>Steps to reproduce the issue</li>
+                <li>What you expected to happen</li>
+                <li>What actually happened</li>
+                <li>Screenshots if applicable</li>
+                <li>Browser and operating system information</li>
+            </ul>
+
+            <div class="contact">
+                <h3>Contact</h3>
+                <p><strong>Developer:</strong> Asim</p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/AsimNet/qr-generator-docs/issues">Report Issues</a></p>
+                <p><strong>Support:</strong> <a href="https://ko-fi.com/asimnet">Ko-fi</a></p>
+            </div>
+        </div>
+
+        <hr style="margin: 50px 0;">
+
+        <!-- ARABIC VERSION -->
+        <div id="arabic" class="arabic">
+            <a href="index.html" class="back-link">→ العودة للرئيسية</a>
+
+            <h1>💬 المساعدة والدعم</h1>
+            <h2>إضافة مولد QR السريع لجداول بيانات Google</h2>
+
+            <div class="support-card">
+                <h3>🐛 الإبلاغ عن خطأ أو طلب ميزة</h3>
+                <p>وجدت خطأً أو لديك طلب ميزة؟ أنشئ issue في مستودع GitHub العام. هذا يساعدنا على تتبع المشكلات وحلها بكفاءة.</p>
+                <a href="https://github.com/AsimNet/qr-generator-docs/issues/new" class="btn" target="_blank">إنشاء Issue في GitHub</a>
+            </div>
+
+            <div class="support-card">
+                <h3>☕ ادعم التطوير</h3>
+                <p>إذا وجدت هذه الإضافة مفيدة، فكر في دعم استمرار تطويرها. دعمك يساعد في إبقاء هذه الأداة مجانية للجميع!</p>
+                <a href="https://ko-fi.com/asimnet" class="btn btn-secondary" target="_blank">اشترِ لي قهوة</a>
+            </div>
+
+            <h2>الأسئلة الشائعة (FAQ)</h2>
+
+            <div class="faq-item">
+                <h4>كيف أثبت الإضافة؟</h4>
+                <p>اذهب إلى جداول بيانات Google ← الإضافات ← الحصول على إضافات ← ابحث عن "Fast QR Generator" ← انقر تثبيت</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>هل بياناتي آمنة؟</h4>
+                <p>نعم! تتم جميع عمليات توليد رموز QR محلياً في متصفحك. لا يتم إرسال أي بيانات إلى خوادم خارجية. اقرأ <a href="privacy-policy.html">سياسة الخصوصية</a> لمزيد من التفاصيل.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>هل يمكنني توليد رموز QR لصفوف متعددة في وقت واحد؟</h4>
+                <p>نعم! ما عليك سوى تحديد النطاق الذي يحتوي على بياناتك وستقوم الإضافة بتوليد رموز QR لجميع الخلايا المحددة.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>ما هو حجم رموز QR التي يمكنني توليدها؟</h4>
+                <p>يمكنك تخصيص حجم رمز QR في إعدادات الإضافة. الحجم الافتراضي يعمل بشكل جيد لمعظم الاستخدامات.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>رمز QR لا يُمسح. ماذا أفعل؟</h4>
+                <p>حاول زيادة حجم رمز QR أو تقليل كمية البيانات المشفرة. الروابط أو النصوص الطويلة جداً قد تنتج رموز QR كثيفة يصعب مسحها.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>هل هناك حد لعدد رموز QR التي يمكنني توليدها؟</h4>
+                <p>لا! لا توجد حدود. ولّد أي عدد تحتاجه من رموز QR.</p>
+            </div>
+
+            <h2>كيفية الحصول على المساعدة</h2>
+            <ul>
+                <li><strong>راجع الأسئلة الشائعة أعلاه</strong> - قد يكون سؤالك قد تمت الإجابة عليه بالفعل</li>
+                <li><strong>ابحث في المشكلات الموجودة</strong> - قد يكون شخص ما قد أبلغ عن نفس المشكلة</li>
+                <li><strong>أنشئ issue جديد</strong> - قدم معلومات مفصلة عن مشكلتك</li>
+            </ul>
+
+            <h2>عند الإبلاغ عن مشكلة</h2>
+            <p>يرجى تضمين:</p>
+            <ul>
+                <li>وصف واضح للمشكلة</li>
+                <li>خطوات إعادة إنتاج المشكلة</li>
+                <li>ما كنت تتوقع حدوثه</li>
+                <li>ما حدث فعلياً</li>
+                <li>لقطات شاشة إن أمكن</li>
+                <li>معلومات المتصفح ونظام التشغيل</li>
+            </ul>
+
+            <div class="contact">
+                <h3>التواصل</h3>
+                <p><strong>المطور:</strong> عاصم</p>
+                <p><strong>GitHub:</strong> <a href="https://github.com/AsimNet/qr-generator-docs/issues">الإبلاغ عن مشكلات</a></p>
+                <p><strong>الدعم:</strong> <a href="https://ko-fi.com/asimnet">Ko-fi</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

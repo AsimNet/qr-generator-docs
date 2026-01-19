@@ -1,0 +1,562 @@
+<script>
+// ==================== I18N ====================
+const i18n = {
+  ar: {
+    title: 'مولد QR السريع', 
+    kofi: 'ادعمني بكوب قهوة!',
+    info: `<b>خطوات الاستخدام:</b><br>
+1️⃣ أنشئ عمود فارغ لرموز QR (مهم!)<br>
+2️⃣ اختر التبويبات المطلوبة<br>
+3️⃣ حدد عمود المصدر (البيانات) وعمود الهدف (QR)<br>
+4️⃣ اضغط "بدء التوليد" واستمتع بالسرعة! ⚡`,
+    selectSheets: 'اختر التبويبات', 
+    selectAll: 'تحديد الكل', 
+    deselectAll: 'إلغاء الكل',
+    loading: 'جاري التحميل...', 
+    settings: 'الإعدادات', 
+    qrSize: 'حجم رمز QR (بكسل)',
+    generate: 'بدء التوليد', 
+    phase1: 'المرحلة 1: توليد رموز QR',
+    phase2: 'المرحلة 2: حفظ في الجدول', 
+    generated: 'تم توليده', 
+    saved: 'تم حفظه',
+    perSecond: '/ثانية', 
+    elapsed: 'الوقت', 
+    stop: 'إيقاف', 
+    stopping: 'جاري الإيقاف...',
+    source: 'المصدر...', 
+    target: 'الهدف...', 
+    selectOne: 'اختر تبويب واحد على الأقل',
+    selectCols: 'حدد الأعمدة لـ', 
+    sameCols: 'المصدر والهدف متطابقان في',
+    stopped: 'تم الإيقاف', 
+    complete: 'اكتمل', 
+    qrCodes: 'رمز QR', 
+    inTime: 'في',
+    seconds: 'ثانية', 
+    failed: 'فشل', 
+    pending: 'انتظار', 
+    genStatus: 'توليد...',
+    saveStatus: 'حفظ...', 
+    done: 'تم',
+    refresh: 'تحديث',
+    refreshing: 'جاري التحديث...'
+  },
+  en: {
+    title: 'Fast QR Generator', 
+    kofi: 'Buy me a coffee!',
+    info: `<b>How to use:</b><br>
+1️⃣ Create an empty column for QR codes (required!)<br>
+2️⃣ Select the sheets you want<br>
+3️⃣ Choose source column (data) and target column (QR)<br>
+4️⃣ Click "Start Generation" and enjoy the speed! ⚡`,
+    selectSheets: 'Select Sheets', 
+    selectAll: 'Select All', 
+    deselectAll: 'Deselect All',
+    loading: 'Loading...', 
+    settings: 'Settings', 
+    qrSize: 'QR Code Size (pixels)',
+    generate: 'Start Generation', 
+    phase1: 'Phase 1: Generate QR Codes',
+    phase2: 'Phase 2: Save to Sheet', 
+    generated: 'Generated', 
+    saved: 'Saved',
+    perSecond: '/sec', 
+    elapsed: 'Time', 
+    stop: 'Stop', 
+    stopping: 'Stopping...',
+    source: 'Source...', 
+    target: 'Target...', 
+    selectOne: 'Select at least one sheet',
+    selectCols: 'Select columns for', 
+    sameCols: 'Source and target are same in',
+    stopped: 'Stopped', 
+    complete: 'Complete', 
+    qrCodes: 'QR codes', 
+    inTime: 'in',
+    seconds: 'seconds', 
+    failed: 'failed', 
+    pending: 'Pending', 
+    genStatus: 'Generating...',
+    saveStatus: 'Saving...', 
+    done: 'Done',
+    refresh: 'Refresh',
+    refreshing: 'Refreshing...'
+  }
+};
+
+// Detect browser language
+function detectLanguage() {
+  const browserLang = navigator.language || navigator.userLanguage || 'en';
+  return browserLang.toLowerCase().startsWith('ar') ? 'ar' : 'en';
+}
+
+let currentLang = detectLanguage();
+
+function t(k) { return i18n[currentLang][k] || k; }
+
+function applyLanguage() {
+  document.body.className = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelector('.lang-toggle').textContent = currentLang === 'ar' ? 'EN' : 'ع';
+  
+  // Update info box with HTML content
+  document.getElementById('infoBox').innerHTML = '🚀 ' + i18n[currentLang].info;
+  
+  // Update other elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (i18n[currentLang][k]) el.textContent = i18n[currentLang][k];
+  });
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  applyLanguage();
+  if (allSheets.length) renderSheets();
+}
+
+// ==================== WEB WORKERS ====================
+const NUM_WORKERS = navigator.hardwareConcurrency || 4;
+let workers = [], workerQueue = [], pendingTasks = new Map(), taskId = 0;
+
+function getWorkerScript() {
+  return `
+${document.getElementById('qrlib').textContent}
+function genQR(text) {
+  try {
+    let t = 0;
+    for (let i = 1; i <= 40; i++) {
+      try { const q = qrcode(i, 'M'); q.addData(text); q.make(); t = i; break; } catch(e) {}
+    }
+    if (!t) return null;
+    const q = qrcode(t, 'M'); q.addData(text); q.make();
+    const m = q.getModuleCount(), d = [];
+    for (let r = 0; r < m; r++) for (let c = 0; c < m; c++) if (q.isDark(r,c)) d.push(r*m+c);
+    return { m, d };
+  } catch(e) { return null; }
+}
+self.onmessage = e => {
+  const r = e.data.items.map(i => ({ row: i.row, qr: genQR(i.value) }));
+  self.postMessage({ id: e.data.id, results: r });
+};`;
+}
+
+function initWorkers() {
+  const blob = new Blob([getWorkerScript()], { type: 'application/javascript' });
+  const url = URL.createObjectURL(blob);
+  for (let i = 0; i < NUM_WORKERS; i++) {
+    const w = new Worker(url);
+    w.busy = false;
+    w.onmessage = e => {
+      w.busy = false;
+      const cb = pendingTasks.get(e.data.id);
+      if (cb) { pendingTasks.delete(e.data.id); cb(e.data.results); }
+      processQueue();
+    };
+    workers.push(w);
+  }
+  URL.revokeObjectURL(url);
+}
+
+function processQueue() {
+  while (workerQueue.length) {
+    const w = workers.find(x => !x.busy);
+    if (!w) break;
+    const t = workerQueue.shift();
+    w.busy = true;
+    w.postMessage(t.msg);
+  }
+}
+
+function submitWork(items) {
+  return new Promise(resolve => {
+    const id = taskId++;
+    pendingTasks.set(id, resolve);
+    workerQueue.push({ msg: { id, items } });
+    processQueue();
+  });
+}
+
+function terminateWorkers() {
+  workers.forEach(w => w.terminate());
+  workers = []; workerQueue = []; pendingTasks.clear();
+}
+
+// ==================== QR TO BASE64 ====================
+function toBase64(qr, size) {
+  if (!qr) return null;
+  const { m, d } = qr;
+  const cell = Math.max(2, Math.floor(size / m));
+  const sz = cell * m;
+  const canvas = document.getElementById('qrCanvas');
+  canvas.width = sz; canvas.height = sz;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, sz, sz);
+  ctx.fillStyle = '#000';
+  for (const idx of d) {
+    const r = Math.floor(idx / m), c = idx % m;
+    ctx.fillRect(c * cell, r * cell, cell, cell);
+  }
+  return canvas.toDataURL('image/png');
+}
+
+// ==================== APP STATE ====================
+let allSheets = [];
+let sheetColumns = {};
+let isRunning = false;
+let shouldStop = false;
+
+// ==================== INITIALIZATION ====================
+window.onload = () => {
+  applyLanguage();
+  loadSheets();
+};
+
+function loadSheets() {
+  google.script.run
+    .withSuccessHandler(sheets => { 
+      allSheets = sheets; 
+      renderSheets(); 
+    })
+    .getAllSheets();
+}
+
+// ==================== REFRESH FUNCTIONALITY ====================
+
+/**
+ * Refresh columns for all selected sheets
+ * This is called when user clicks the refresh button
+ */
+function refreshColumns() {
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  btn.disabled = true;
+  
+  // Get all selected sheet names
+  const selectedSheets = [];
+  allSheets.forEach((s, i) => {
+    if (document.getElementById('sh_' + i)?.checked) {
+      selectedSheets.push(s.name);
+    }
+  });
+  
+  if (selectedSheets.length === 0) {
+    btn.classList.remove('spinning');
+    btn.disabled = false;
+    return;
+  }
+  
+  // Refresh all at once (more efficient)
+  google.script.run
+    .withSuccessHandler(results => {
+      // Update columns for each sheet
+      allSheets.forEach((s, i) => {
+        if (results[s.name]) {
+          sheetColumns[i] = results[s.name];
+          updateColumnDropdowns(i, results[s.name]);
+        }
+      });
+      
+      btn.classList.remove('spinning');
+      btn.disabled = false;
+    })
+    .withFailureHandler(() => {
+      btn.classList.remove('spinning');
+      btn.disabled = false;
+    })
+    .refreshAllColumns(selectedSheets);
+}
+
+/**
+ * Update column dropdowns for a specific sheet
+ */
+function updateColumnDropdowns(i, cols) {
+  const src = document.getElementById('src_' + i);
+  const tgt = document.getElementById('tgt_' + i);
+  
+  if (!src || !tgt) return;
+  
+  // Save current selections
+  const prevSrc = src.value;
+  const prevTgt = tgt.value;
+  
+  // Update options
+  src.innerHTML = `<option value="">${t('source')}</option>`;
+  tgt.innerHTML = `<option value="">${t('target')}</option>`;
+  
+  cols.forEach(c => {
+    src.innerHTML += `<option value="${c.index}">${c.letter} - ${c.name}</option>`;
+    tgt.innerHTML += `<option value="${c.index}">${c.letter} - ${c.name}</option>`;
+  });
+  
+  // Restore previous selections if still valid
+  if (prevSrc && cols.some(c => c.index == prevSrc)) {
+    src.value = prevSrc;
+  }
+  if (prevTgt && cols.some(c => c.index == prevTgt)) {
+    tgt.value = prevTgt;
+  }
+  
+  // If no selection, auto-select first two columns
+  if (!src.value && cols.length >= 1) {
+    src.value = cols[0].index;
+  }
+  if (!tgt.value && cols.length >= 2) {
+    tgt.value = cols[cols.length - 1].index; // Select last column for QR
+  }
+}
+
+// ==================== SHEET RENDERING ====================
+function renderSheets() {
+  const list = document.getElementById('sheetList');
+  list.innerHTML = '';
+  
+  allSheets.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'sheet-item' + (s.isActive ? ' selected' : '');
+    div.innerHTML = `
+      <input type="checkbox" id="sh_${i}" ${s.isActive ? 'checked' : ''} onchange="toggleSheet(${i})">
+      <span class="sheet-name">${s.name}</span>
+      <div class="sheet-config" id="cfg_${i}">
+        <div class="config-row">
+          <select id="src_${i}"><option>${t('source')}</option></select>
+          <select id="tgt_${i}"><option>${t('target')}</option></select>
+        </div>
+      </div>`;
+    list.appendChild(div);
+    
+    if (s.isActive) loadColumns(i, s.name);
+  });
+}
+
+function toggleSheet(i) {
+  const cb = document.getElementById('sh_' + i);
+  cb.closest('.sheet-item').classList.toggle('selected', cb.checked);
+  if (cb.checked && !sheetColumns[i]) {
+    loadColumns(i, allSheets[i].name);
+  }
+}
+
+function loadColumns(i, name) {
+  google.script.run
+    .withSuccessHandler(cols => {
+      sheetColumns[i] = cols;
+      updateColumnDropdowns(i, cols);
+    })
+    .getColumnHeadersFromSheet(name);
+}
+
+function selectAll() { 
+  allSheets.forEach((s, i) => { 
+    document.getElementById('sh_' + i).checked = true; 
+    toggleSheet(i); 
+  }); 
+}
+
+function deselectAll() { 
+  allSheets.forEach((s, i) => { 
+    document.getElementById('sh_' + i).checked = false; 
+    toggleSheet(i); 
+  }); 
+}
+
+function getSelected() {
+  return allSheets.map((s, i) => {
+    const cb = document.getElementById('sh_' + i);
+    if (!cb?.checked) return null;
+    return {
+      sheetName: s.name, 
+      sourceCol: +document.getElementById('src_' + i).value,
+      targetCol: +document.getElementById('tgt_' + i).value
+    };
+  }).filter(Boolean);
+}
+
+function stopGeneration() {
+  shouldStop = true;
+  document.getElementById('stopBtn').disabled = true;
+  document.getElementById('stopBtn').innerHTML = `⏳ ${t('stopping')}`;
+}
+
+// ==================== MAIN GENERATION ====================
+async function startGeneration() {
+  const selected = getSelected();
+  if (!selected.length) return showResult(t('selectOne'), 'error');
+  
+  for (const s of selected) {
+    if (!s.sourceCol || !s.targetCol) return showResult(`${t('selectCols')} ${s.sheetName}`, 'error');
+    if (s.sourceCol === s.targetCol) return showResult(`${t('sameCols')} ${s.sheetName}`, 'error');
+  }
+  
+  const qrSize = +document.getElementById('qrSize').value || 150;
+  initWorkers();
+  isRunning = true; 
+  shouldStop = false;
+  
+  // UI setup
+  document.getElementById('formContainer').style.display = 'none';
+  document.getElementById('progressContainer').style.display = 'block';
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('stopBtn').disabled = false;
+  document.getElementById('stopBtn').innerHTML = `⏹️ ${t('stop')}`;
+  document.getElementById('phase1').style.display = 'block';
+  document.getElementById('phase2').style.display = 'none';
+  document.getElementById('statCountLabel').textContent = t('generated');
+  
+  document.getElementById('sheetStatus').innerHTML = selected.map(s =>
+    `<div class="status-item" id="st_${s.sheetName.replace(/\s/g,'_')}">
+      <span class="name">${s.sheetName}</span><span class="badge pending">${t('pending')}</span>
+    </div>`).join('');
+  
+  updateGen(0); 
+  updateStats(0, 0, '0s');
+  
+  // Fetch all data
+  const sheetsData = await new Promise(r => 
+    google.script.run.withSuccessHandler(r).getMultiSheetData(selected)
+  );
+  const totalItems = sheetsData.reduce((s, d) => s + d.data.length, 0);
+  
+  // ========== PHASE 1: GENERATE ALL QR CODES ==========
+  const allGenerated = [];
+  let genCount = 0;
+  const startTime = Date.now();
+  const BATCH = 20;
+  
+  for (const sheet of sheetsData) {
+    if (shouldStop) break;
+    setStatus(sheet.sheetName, 'generating', t('genStatus'));
+    const sheetItems = [];
+    
+    for (let i = 0; i < sheet.data.length; i += BATCH * NUM_WORKERS) {
+      if (shouldStop) break;
+      
+      const tasks = [];
+      for (let j = 0; j < NUM_WORKERS && (i + j * BATCH) < sheet.data.length; j++) {
+        const chunk = sheet.data.slice(i + j * BATCH, i + j * BATCH + BATCH);
+        if (chunk.length) tasks.push(submitWork(chunk));
+      }
+      
+      const results = await Promise.all(tasks);
+      
+      for (const batch of results) {
+        for (const r of batch) {
+          genCount++;
+          if (r.qr) {
+            const base64 = toBase64(r.qr, qrSize);
+            if (base64) sheetItems.push({ row: r.row, base64 });
+          }
+        }
+      }
+      
+      const pct = Math.round(genCount / totalItems * 100);
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      const speed = Math.round(genCount / (Date.now() - startTime) * 1000);
+      updateGen(pct);
+      updateStats(genCount, speed, elapsed + 's');
+    }
+    
+    allGenerated.push({ sheetName: sheet.sheetName, targetCol: sheet.targetCol, items: sheetItems });
+    if (!shouldStop) setStatus(sheet.sheetName, 'done', `✓ ${sheetItems.length}`);
+  }
+  
+  terminateWorkers();
+  
+  if (shouldStop) {
+    isRunning = false;
+    return showResult(`⏹️ ${t('stopped')} - ${t('generated')} ${genCount} ${t('qrCodes')}`, 'warning');
+  }
+  
+  // ========== PHASE 2: SAVE TO SHEETS ==========
+  document.getElementById('phase1').style.display = 'none';
+  document.getElementById('phase2').style.display = 'block';
+  document.getElementById('statCountLabel').textContent = t('saved');
+  updateSave(0);
+  
+  const totalToSave = allGenerated.reduce((s, g) => s + g.items.length, 0);
+  let savedCount = 0, failedCount = 0;
+  const saveStart = Date.now();
+  const SAVE_BATCH = 50;
+  
+  for (const sheet of allGenerated) {
+    if (shouldStop) break;
+    setStatus(sheet.sheetName, 'saving', t('saveStatus'));
+    
+    // Setup dimensions first
+    const rows = sheet.items.map(i => i.row);
+    google.script.run.setupDimensions(sheet.sheetName, sheet.targetCol, qrSize, rows);
+    
+    for (let i = 0; i < sheet.items.length; i += SAVE_BATCH) {
+      if (shouldStop) break;
+      
+      const batch = sheet.items.slice(i, i + SAVE_BATCH);
+      const isFirst = (i === 0);
+      const isLast = (i + SAVE_BATCH >= sheet.items.length);
+      
+      const res = await new Promise(r => google.script.run
+        .withSuccessHandler(r)
+        .withFailureHandler(() => r({ saved: 0, failed: batch.length }))
+        .writeBatch(sheet.sheetName, batch, sheet.targetCol, qrSize, isFirst, isLast)
+      );
+      
+      savedCount += res.saved;
+      failedCount += res.failed;
+      
+      const pct = Math.round(savedCount / totalToSave * 100);
+      const elapsed = ((Date.now() - saveStart) / 1000).toFixed(1);
+      const speed = Math.round(savedCount / (Date.now() - saveStart) * 1000);
+      updateSave(pct);
+      updateStats(savedCount, speed, elapsed + 's');
+    }
+    
+    setStatus(sheet.sheetName, shouldStop ? 'stopped' : 'done', 
+      shouldStop ? `⏹️ ${t('stopped')}` : `✓ ${sheet.items.length}`);
+  }
+  
+  isRunning = false;
+  const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+  
+  if (shouldStop) {
+    showResult(`⏹️ ${t('stopped')} - ${t('saved')} ${savedCount} ${t('qrCodes')}`, 'warning');
+  } else {
+    let msg = `✅ ${t('complete')}! ${savedCount} ${t('qrCodes')} ${t('inTime')} ${totalTime} ${t('seconds')}`;
+    if (failedCount > 0) msg += ` (${t('failed')} ${failedCount})`;
+    showResult(msg, 'success');
+  }
+}
+
+// ==================== UI HELPERS ====================
+function updateGen(pct) {
+  const f = document.getElementById('genFill');
+  f.style.width = pct + '%'; 
+  f.textContent = pct + '%';
+}
+
+function updateSave(pct) {
+  const f = document.getElementById('saveFill');
+  f.style.width = pct + '%'; 
+  f.textContent = pct + '%';
+}
+
+function updateStats(count, speed, time) {
+  document.getElementById('statCount').textContent = count;
+  document.getElementById('statSpeed').textContent = speed;
+  document.getElementById('statTime').textContent = time;
+}
+
+function setStatus(name, status, text) {
+  const el = document.getElementById('st_' + name.replace(/\s/g, '_'));
+  if (!el) return;
+  el.querySelector('.badge').className = 'badge ' + status;
+  el.querySelector('.badge').textContent = text;
+}
+
+function showResult(msg, type) {
+  document.getElementById('formContainer').style.display = 'block';
+  document.getElementById('progressContainer').style.display = 'none';
+  const r = document.getElementById('result');
+  r.textContent = msg; 
+  r.className = 'result ' + type; 
+  r.style.display = 'block';
+}
+</script>

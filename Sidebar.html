@@ -1,171 +1,101 @@
-/**
- * Fast QR Generator for Google Sheets
- * Optimized with TRUE batch operations
- * 
- * Created by Asim - https://ko-fi.com/asimnet
- */
-
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('🔲 QR Generator')
-    .addItem('Open Generator', 'showSidebar')
-    .addToUi();
-}
-
-function showSidebar() {
-  const html = HtmlService.createHtmlOutputFromFile('Sidebar')
-    .setTitle('QR Generator')
-    .setWidth(320);
-  SpreadsheetApp.getUi().showSidebar(html);
-}
-
-function getAllSheets() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const activeSheet = ss.getActiveSheet();
-  return ss.getSheets().map(sheet => ({
-    name: sheet.getName(),
-    isActive: sheet.getName() === activeSheet.getName()
-  }));
-}
-
-function getColumnHeadersFromSheet(sheetName) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(sheetName);
-  if (!sheet) return [];
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <?!= include('Styles') ?>
+</head>
+<body>
+  <div class="header">
+    <h3>⚡ <span data-i18n="title">Fast QR Generator</span></h3>
+    <button class="lang-toggle" onclick="toggleLanguage()">ع</button>
+  </div>
   
-  const lastCol = sheet.getLastColumn();
-  if (lastCol === 0) return [];
+  <div class="kofi-box">
+    <a href="https://ko-fi.com/asimnet" target="_blank">
+      ☕ <span data-i18n="kofi">Buy me a coffee!</span>
+    </a>
+  </div>
   
-  const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  const columns = [];
+  <div class="info-box" id="infoBox">
+    <!-- Will be filled by applyLanguage() -->
+  </div>
   
-  for (let i = 0; i < lastCol; i++) {
-    columns.push({
-      index: i + 1,
-      letter: columnToLetter(i + 1),
-      name: headers[i] ? String(headers[i]).substring(0, 20) : ''
-    });
-  }
-  
-  return columns;
-}
-
-function columnToLetter(column) {
-  let temp, letter = '';
-  while (column > 0) {
-    temp = (column - 1) % 26;
-    letter = String.fromCharCode(temp + 65) + letter;
-    column = (column - temp - 1) / 26;
-  }
-  return letter;
-}
-
-// Get ALL data from ALL sheets in ONE call
-function getMultiSheetData(sheetsConfig) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const results = [];
-  
-  for (const config of sheetsConfig) {
-    const sheet = ss.getSheetByName(config.sheetName);
-    if (!sheet) continue;
+  <div id="formContainer">
+    <div class="section">
+      <div class="section-title">
+        <span>📑 <span data-i18n="selectSheets">Select Sheets</span></span>
+        <button class="btn-refresh" id="refreshBtn" onclick="refreshColumns()" title="Refresh columns">
+          <span class="refresh-icon">🔄</span>
+          <span data-i18n="refresh">Refresh</span>
+        </button>
+      </div>
+      <div class="select-btns">
+        <button onclick="selectAll()" data-i18n="selectAll">Select All</button>
+        <button onclick="deselectAll()" data-i18n="deselectAll">Deselect All</button>
+      </div>
+      <div class="sheet-list" id="sheetList">
+        <div style="padding:10px;color:#666" data-i18n="loading">Loading...</div>
+      </div>
+    </div>
     
-    const lastRow = sheet.getLastRow();
-    if (lastRow < 2) continue;
+    <div class="section">
+      <div class="section-title">⚙️ <span data-i18n="settings">Settings</span></div>
+      <div class="form-group">
+        <label data-i18n="qrSize">QR Code Size (pixels)</label>
+        <input type="number" id="qrSize" value="150" min="80" max="400">
+      </div>
+    </div>
     
-    // Read ALL data at once - single read operation
-    const sourceData = sheet.getRange(2, config.sourceCol, lastRow - 1, 1).getValues();
-    const data = [];
-    
-    for (let i = 0; i < sourceData.length; i++) {
-      const value = sourceData[i][0];
-      if (value !== null && value !== undefined && String(value).trim() !== '') {
-        data.push({ row: i + 2, value: String(value) });
-      }
-    }
-    
-    results.push({
-      sheetName: config.sheetName,
-      targetCol: config.targetCol,
-      data: data
-    });
-  }
+    <button class="btn btn-primary" onclick="startGeneration()" id="startBtn">
+      ⚡ <span data-i18n="generate">Start Generation</span>
+    </button>
+  </div>
   
-  return results;
-}
-
-/**
- * OPTIMIZED BATCH WRITE
- * Write a batch of QR codes - called with larger batches, fewer times
- * Key optimizations:
- * 1. NO flush() during the batch - only at the end
- * 2. Minimal row height operations
- * 3. Single column width set
- */
-function writeBatch(sheetName, items, targetCol, qrSize, setupDimensions) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(sheetName);
-  
-  if (!sheet) return { saved: 0, failed: items.length };
-  
-  let saved = 0;
-  let failed = 0;
-  
-  // Set column width only once per sheet
-  if (setupDimensions) {
-    try {
-      sheet.setColumnWidth(targetCol, qrSize + 10);
-    } catch (e) {}
-  }
-  
-  // Write all images WITHOUT flushing
-  for (const item of items) {
-    try {
-      if (!item.base64 || !item.base64.startsWith('data:image/png;base64,')) {
-        failed++;
-        continue;
-      }
+  <div class="progress-container" id="progressContainer">
+    <div class="section">
+      <!-- Phase 1: Generation -->
+      <div id="phase1">
+        <div class="phase-label">🔄 <span data-i18n="phase1">Phase 1: Generate QR Codes</span></div>
+        <div class="progress-bar">
+          <div class="progress-fill gen" id="genFill" style="width:0%">0%</div>
+        </div>
+      </div>
       
-      const cellImage = SpreadsheetApp.newCellImage()
-        .setSourceUrl(item.base64)
-        .setAltTextTitle('QR')
-        .build();
+      <!-- Phase 2: Saving -->
+      <div id="phase2" style="display:none">
+        <div class="phase-label">💾 <span data-i18n="phase2">Phase 2: Save to Sheet</span></div>
+        <div class="progress-bar">
+          <div class="progress-fill save" id="saveFill" style="width:0%">0%</div>
+        </div>
+      </div>
       
-      // Single setValue per cell - this is unavoidable for CellImage
-      sheet.getRange(item.row, targetCol).setValue(cellImage);
-      saved++;
-    } catch (e) {
-      failed++;
-    }
-  }
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-value" id="statCount">0</div>
+          <div class="stat-label" id="statCountLabel" data-i18n="generated">Generated</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="statSpeed">0</div>
+          <div class="stat-label" data-i18n="perSecond">/sec</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="statTime">0s</div>
+          <div class="stat-label" data-i18n="elapsed">Time</div>
+        </div>
+      </div>
+      
+      <div class="sheet-status" id="sheetStatus"></div>
+      <button class="btn btn-stop" onclick="stopGeneration()" id="stopBtn">
+        ⏹️ <span data-i18n="stop">Stop</span>
+      </button>
+    </div>
+  </div>
   
-  // Batch set row heights AFTER all images
-  if (setupDimensions) {
-    for (const item of items) {
-      try {
-        sheet.setRowHeight(item.row, qrSize + 10);
-      } catch (e) {}
-    }
-  }
-  
-  // Single flush at the end of batch
-  SpreadsheetApp.flush();
-  
-  return { saved, failed };
-}
+  <div class="result" id="result"></div>
+  <div class="footer">Made with ❤️ by <a href="https://ko-fi.com/asimnet" target="_blank">Asim</a></div>
+  <canvas id="qrCanvas"></canvas>
 
-/**
- * Set dimensions for ALL rows at once (called once per sheet)
- */
-function setupDimensions(sheetName, targetCol, qrSize, rows) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(sheetName);
-  if (!sheet) return;
-  
-  try {
-    sheet.setColumnWidth(targetCol, qrSize + 10);
-    for (const row of rows) {
-      sheet.setRowHeight(row, qrSize + 10);
-    }
-    SpreadsheetApp.flush();
-  } catch (e) {}
-}
+  <?!= include('QRLib') ?>
+  <?!= include('App') ?>
+</body>
+</html>
